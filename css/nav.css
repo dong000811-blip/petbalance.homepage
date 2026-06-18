@@ -61,8 +61,9 @@
 .nav__menu {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: 1.5rem;
   height: 100%;
+  margin-left: 80px;
 }
 
 .nav__item {

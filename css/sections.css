@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-bg-section), var(--color-white));
+  background: linear-gradient(135deg, #0F2340 0%, #1B3A5C 60%, #2A5280 100%);
 }
 
 /* 배경 이미지 사용 시: class="section-hero has-bg" + inline style background-image */
@@ -61,7 +61,7 @@
   display: inline-block;
   font-size: var(--size-md);
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-accent);
   margin-bottom: var(--space-sm);
 }
 
@@ -69,13 +69,13 @@
   font-size: var(--size-hero);
   font-weight: 800;
   line-height: 1.25;
-  color: var(--color-text);
+  color: var(--color-white);
   margin-bottom: var(--space-sm);
 }
 
 .hero__sub {
   font-size: var(--size-md);
-  color: var(--color-text-sub);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: var(--space-md);
 }
 

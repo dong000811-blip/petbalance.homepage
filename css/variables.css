@@ -5,18 +5,18 @@
 
 :root {
   /* Brand Colors */
-  --color-primary: #2E7D6E;        /* 메인 그린 */
-  --color-primary-light: #4AA896;
-  --color-primary-dark: #1A5C50;
-  --color-accent: #F4A72B;         /* 포인트 골드 */
-  --color-accent-dark: #D4891A;
+  --color-primary: #1B3A5C;        /* 메인 네이비 */
+  --color-primary-light: #2A5280;
+  --color-primary-dark: #0F2340;
+  --color-accent: #C8202E;         /* 포인트 레드 */
+  --color-accent-dark: #A01820;
 
   /* Neutrals */
   --color-white: #FFFFFF;
-  --color-bg: #F8F9FA;
-  --color-bg-section: #F2F7F6;
-  --color-text: #1A1A1A;
-  --color-text-sub: #555555;
+  --color-bg: #F7F8FA;
+  --color-bg-section: #EEF1F5;
+  --color-text: #1A1A2E;
+  --color-text-sub: #6B7280;
   --color-text-light: #999999;
   --color-border: #E0E0E0;
 
