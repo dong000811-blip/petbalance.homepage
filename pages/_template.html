@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="펫발란스 - 반려동물과 함께하는 건강한 라이프스타일" />
+  <title>페이지 제목 | PETBALANCE</title>
+
+  <!--
+    ====================================================
+    서브페이지 복사 템플릿
+    사용법: 이 파일을 pages/[카테고리]/파일명.html 로 복사
+            (예: pages/petbalance/about.html)
+    경로 기준: 이 템플릿은 pages/[카테고리]/ 위치(루트 기준 2단계 아래)를 가정하여
+              자산 경로는 ../../ , 형제 카테고리 경로는 ../ 로 작성되어 있습니다.
+    수정할 부분: <title>, breadcrumb, page-header__title, page-content 내용
+    ====================================================
+  -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../css/variables.css" />
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/nav.css" />
+  <link rel="stylesheet" href="../../css/sections.css" />
+</head>
+<body>
+
+  <!-- ========================================================
+       NAVIGATION (index.html과 동일 구조, 경로만 ../../ 기준)
+       ======================================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+
+      <!-- Logo -->
+      <a href="../../index.html" class="nav__logo">
+        <span class="nav__logo-en">Pet<span>Balance</span></span>
+        <span class="nav__logo-ko">펫발란스</span>
+      </a>
+
+      <!-- GNB -->
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="../petbalance/" class="nav__link">PETBALANCE</a>
+        </li>
+        <li class="nav__item">
+          <a href="../pet-product/" class="nav__link">PET PRODUCT</a>
+        </li>
+        <li class="nav__item">
+          <a href="../pet-service/" class="nav__link">PET SERVICE</a>
+        </li>
+        <li class="nav__item">
+          <a href="../pet-advisor/" class="nav__link">PET ADVISOR</a>
+        </li>
+        <li class="nav__item">
+          <a href="../community/" class="nav__link">COMMUNITY</a>
+        </li>
+        <li class="nav__item">
+          <a href="../ethics/" class="nav__link">ETHICS</a>
+        </li>
+      </ul>
+
+      <!-- Right Controls -->
+      <div class="nav__controls">
+        <button class="nav__lang" id="langToggle" aria-label="언어 전환">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mega Menu -->
+  <div class="nav__mega" id="megaMenu">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-col">
+        <a href="../petbalance/about.html" class="nav__mega-link">소개</a>
+        <a href="../petbalance/ceo.html" class="nav__mega-link">CEO 인사말</a>
+        <a href="../petbalance/history.html" class="nav__mega-link">연혁</a>
+        <a href="../petbalance/factory.html" class="nav__mega-link">공장소개</a>
+        <a href="../petbalance/directions.html" class="nav__mega-link">찾아오시는길</a>
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET PRODUCT 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET SERVICE 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET ADVISOR 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <a href="../community/notice.html" class="nav__mega-link">공지사항</a>
+      </div>
+      <div class="nav__mega-col">
+        <a href="../ethics/intro.html" class="nav__mega-link">윤리규정소개</a>
+        <a href="../ethics/report.html" class="nav__mega-link">윤리신고센터</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE HEADER (breadcrumb + 제목 — 페이지마다 수정)
+       ======================================================== -->
+  <header class="page-header">
+    <div class="container">
+      <p class="page-header__breadcrumb fade-in">
+        <a href="../../index.html">HOME</a> &rsaquo;
+        <a href="../petbalance/">PETBALANCE</a> &rsaquo;
+        페이지명
+      </p>
+      <h1 class="page-header__title fade-up delay-1">페이지 제목</h1>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       PAGE CONTENT (이 영역만 페이지별로 채우기)
+       ======================================================== -->
+  <main class="page-content">
+    <div class="container">
+      <p class="fade-up">여기에 본문 내용을 작성하세요.</p>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">PETBALANCE</div>
+          <p class="footer__brand-desc">
+            반려동물과 함께하는<br>건강한 라이프스타일을 선도합니다.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer__col-title">PETBALANCE</div>
+          <div class="footer__col-links">
+            <a href="../petbalance/about.html" class="footer__col-link">소개</a>
+            <a href="../petbalance/ceo.html" class="footer__col-link">CEO 인사말</a>
+            <a href="../petbalance/history.html" class="footer__col-link">연혁</a>
+            <a href="../petbalance/factory.html" class="footer__col-link">공장소개</a>
+            <a href="../petbalance/directions.html" class="footer__col-link">찾아오시는길</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">PET PRODUCT</div>
+          <div class="footer__col-links">
+            <!-- 서브 페이지 생성 후 추가 -->
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">COMMUNITY</div>
+          <div class="footer__col-links">
+            <a href="../community/notice.html" class="footer__col-link">공지사항</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">ETHICS</div>
+          <div class="footer__col-links">
+            <a href="../ethics/intro.html" class="footer__col-link">윤리규정소개</a>
+            <a href="../ethics/report.html" class="footer__col-link">윤리신고센터</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호: 000-00-00000 | 대표: 홍길동</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="../../js/nav.js"></script>
+  <script src="../../js/animations.js"></script>
+
+</body>
+</html>

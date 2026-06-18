@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="펫발란스 - 반려동물과 함께하는 건강한 라이프스타일" />
+  <title>PETBALANCE | 펫발란스</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+
+  <!-- Favicon (추후 교체) -->
+  <!-- <link rel="icon" href="assets/images/favicon.ico" /> -->
+</head>
+<body>
+
+  <!-- ========================================================
+       NAVIGATION
+       wooriwa 구조 동일: 로고 / GNB / 언어 / 햄버거
+       ======================================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+
+      <!-- Logo -->
+      <a href="/" class="nav__logo">
+        <span class="nav__logo-en">Pet<span>Balance</span></span>
+        <span class="nav__logo-ko">펫발란스</span>
+      </a>
+
+      <!-- GNB -->
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="pages/petbalance/" class="nav__link">PETBALANCE</a>
+          <!-- Dropdown (필요 시 활성화) -->
+          <!--
+          <div class="nav__dropdown">
+            <a href="pages/petbalance/about.html" class="nav__dropdown-link">소개</a>
+            <a href="pages/petbalance/ceo.html" class="nav__dropdown-link">CEO 인사말</a>
+            <a href="pages/petbalance/history.html" class="nav__dropdown-link">연혁</a>
+          </div>
+          -->
+        </li>
+        <li class="nav__item">
+          <a href="pages/pet-product/" class="nav__link">PET PRODUCT</a>
+        </li>
+        <li class="nav__item">
+          <a href="pages/pet-service/" class="nav__link">PET SERVICE</a>
+        </li>
+        <li class="nav__item">
+          <a href="pages/pet-advisor/" class="nav__link">PET ADVISOR</a>
+        </li>
+        <li class="nav__item">
+          <a href="pages/community/" class="nav__link">COMMUNITY</a>
+        </li>
+        <li class="nav__item">
+          <a href="pages/ethics/" class="nav__link">ETHICS</a>
+        </li>
+      </ul>
+
+      <!-- Right Controls -->
+      <div class="nav__controls">
+        <button class="nav__lang" id="langToggle" aria-label="언어 전환">
+          <!-- 지구본 아이콘 (SVG inline) -->
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mega Menu (햄버거 클릭 시 표시 — wooriwa 스타일 가로 펼침) -->
+  <div class="nav__mega" id="megaMenu">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-col">
+        <a href="pages/petbalance/about.html" class="nav__mega-link">소개</a>
+        <a href="pages/petbalance/ceo.html" class="nav__mega-link">CEO 인사말</a>
+        <a href="pages/petbalance/history.html" class="nav__mega-link">연혁</a>
+        <a href="pages/petbalance/factory.html" class="nav__mega-link">공장소개</a>
+        <a href="pages/petbalance/directions.html" class="nav__mega-link">찾아오시는길</a>
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET PRODUCT 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET SERVICE 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET ADVISOR 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <a href="pages/community/notice.html" class="nav__mega-link">공지사항</a>
+      </div>
+      <div class="nav__mega-col">
+        <a href="pages/ethics/intro.html" class="nav__mega-link">윤리규정소개</a>
+        <a href="pages/ethics/report.html" class="nav__mega-link">윤리신고센터</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       SIDE NAV DOTS
+       ======================================================== -->
+  <nav class="side-nav" aria-label="페이지 내비게이션">
+    <div class="side-nav__item active" data-section="hero">
+      <span class="side-nav__label">HOME</span>
+      <span class="side-nav__dot"></span>
+    </div>
+    <div class="side-nav__item" data-section="business">
+      <span class="side-nav__label">BUSINESS</span>
+      <span class="side-nav__dot"></span>
+    </div>
+    <div class="side-nav__item" data-section="brand">
+      <span class="side-nav__label">BRAND</span>
+      <span class="side-nav__dot"></span>
+    </div>
+    <div class="side-nav__item" data-section="contact">
+      <span class="side-nav__label">CONTACT</span>
+      <span class="side-nav__dot"></span>
+    </div>
+  </nav>
+
+  <!-- ========================================================
+       SECTION 1: HERO
+       배경 이미지 추가 시: style="background-image:url(...)" + class="has-bg"
+       ======================================================== -->
+  <section class="section section-hero" id="hero">
+    <!-- 배경 장식 원 -->
+    <div class="hero__bg-circle hero__bg-circle--1"></div>
+    <div class="hero__bg-circle hero__bg-circle--2"></div>
+
+    <div class="container">
+      <div class="hero__content">
+        <span class="hero__eyebrow fade-in">반려동물과 함께하는</span>
+        <h1 class="hero__title fade-up delay-1">
+          <strong>건강한 라이프스타일을<br>선도하는 펫발란스</strong>
+        </h1>
+        <p class="hero__sub fade-up delay-2">
+          반려동물의 건강과 행복을 위한 프리미엄 솔루션
+        </p>
+        <div class="hero__cta fade-up delay-3">
+          <a href="pages/pet-product/" class="btn btn-primary">
+            ▶ 제품 둘러보기
+          </a>
+          <a href="pages/petbalance/" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.5);">
+            브랜드 소개
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Down 인디케이터 -->
+    <div class="scroll-down">SCROLL DOWN</div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 2: BUSINESS
+       wooriwa "사업영역" 섹션과 동일 구조
+       ======================================================== -->
+  <section class="section section-business" id="business">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow fade-in">Petbalance's Business</span>
+        <h2 class="section-title fade-up delay-1">펫발란스 사업영역</h2>
+        <p class="section-desc fade-up delay-2">
+          반려동물이 더 건강하고 행복한 삶의 질을 누릴 수 있도록<br>
+          차원 높은 서비스를 제공합니다.
+        </p>
+      </div>
+
+      <div class="business-grid">
+        <!-- Card 1 -->
+        <a href="pages/pet-product/" class="business-card fade-up delay-1">
+          <div class="business-card__title-en">Pet Product</div>
+          <div class="business-card__title-ko">펫 푸드 / 용품</div>
+          <div class="business-card__img-wrap">
+            <!-- 이미지 교체: src="assets/images/business-product.jpg" -->
+            <img src="assets/images/placeholder-product.jpg" alt="펫 제품" loading="lazy" />
+          </div>
+          <span class="business-card__more">Read More &rsaquo;</span>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="pages/petbalance/factory.html" class="business-card fade-up delay-2">
+          <div class="business-card__title-en">Factory</div>
+          <div class="business-card__title-ko">반려동물 식품 제조</div>
+          <div class="business-card__img-wrap">
+            <img src="assets/images/placeholder-factory.jpg" alt="공장" loading="lazy" />
+          </div>
+          <span class="business-card__more">Read More &rsaquo;</span>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="pages/pet-service/" class="business-card fade-up delay-3">
+          <div class="business-card__title-en">E-Commerce</div>
+          <div class="business-card__title-ko">온라인 커머스</div>
+          <div class="business-card__img-wrap">
+            <img src="assets/images/placeholder-ecommerce.jpg" alt="이커머스" loading="lazy" />
+          </div>
+          <span class="business-card__more">Read More &rsaquo;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 3: BRAND / PRODUCT HIGHLIGHT
+       ======================================================== -->
+  <section class="section section-brand" id="brand">
+    <div class="container">
+      <div class="brand-layout">
+        <div class="brand-text fade-up">
+          <span class="eyebrow">Our Brand</span>
+          <h2 class="section-title">신뢰할 수 있는<br>펫발란스 브랜드</h2>
+          <p class="section-desc">
+            엄선된 원재료와 과학적 배합으로 만들어진 프리미엄 반려동물 사료.
+            반려동물의 건강한 하루를 위한 최선의 선택입니다.
+          </p>
+          <a href="pages/pet-product/" class="btn btn-outline" style="margin-top:2rem;">
+            제품 보러가기 &rsaquo;
+          </a>
+        </div>
+        <div class="brand-image fade-up delay-2">
+          <!-- 이미지 교체: src="assets/images/brand-main.jpg" -->
+          <img src="assets/images/placeholder-brand.jpg" alt="펫발란스 브랜드" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 4: CONTACT / CTA
+       ======================================================== -->
+  <section class="section section-contact" id="contact">
+    <div class="container">
+      <span class="eyebrow fade-in" style="color:rgba(255,255,255,0.6);">Get in Touch</span>
+      <h2 class="section-title fade-up delay-1">펫발란스와 함께하세요</h2>
+      <p class="section-desc fade-up delay-2">
+        제품 문의, 유통 제안, 협업 요청 — 언제든지 연락 주세요.
+      </p>
+      <div class="contact-links fade-up delay-3">
+        <a href="pages/community/notice.html" class="contact-link primary">공지사항 보기</a>
+        <a href="mailto:info@petbalance.co.kr" class="contact-link">이메일 문의</a>
+        <a href="pages/petbalance/directions.html" class="contact-link">찾아오시는길</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">PETBALANCE</div>
+          <p class="footer__brand-desc">
+            반려동물과 함께하는<br>건강한 라이프스타일을 선도합니다.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer__col-title">PETBALANCE</div>
+          <div class="footer__col-links">
+            <a href="pages/petbalance/about.html" class="footer__col-link">소개</a>
+            <a href="pages/petbalance/ceo.html" class="footer__col-link">CEO 인사말</a>
+            <a href="pages/petbalance/history.html" class="footer__col-link">연혁</a>
+            <a href="pages/petbalance/factory.html" class="footer__col-link">공장소개</a>
+            <a href="pages/petbalance/directions.html" class="footer__col-link">찾아오시는길</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">PET PRODUCT</div>
+          <div class="footer__col-links">
+            <!-- 서브 페이지 생성 후 추가 -->
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">COMMUNITY</div>
+          <div class="footer__col-links">
+            <a href="pages/community/notice.html" class="footer__col-link">공지사항</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">ETHICS</div>
+          <div class="footer__col-links">
+            <a href="pages/ethics/intro.html" class="footer__col-link">윤리규정소개</a>
+            <a href="pages/ethics/report.html" class="footer__col-link">윤리신고센터</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호: 000-00-00000 | 대표: 홍길동</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+
+</body>
+</html>
