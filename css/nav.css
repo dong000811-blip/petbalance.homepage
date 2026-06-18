@@ -105,36 +105,42 @@
 /* GNB 개별 드롭다운 (필요 시 HTML 주석 해제) */
 .nav__dropdown {
   position: absolute;
-  top: 85%;
+  top: 100%;
   left: 50%;
-  min-width: 180px;
   transform: translateX(-50%);
   background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card-hover);
-  padding: 0.75rem 0;
+  border-top: 2px solid var(--color-primary);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  min-width: 160px;
+  padding: 0.5rem 0;
   opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
   pointer-events: none;
-  transition: var(--transition-base);
+  z-index: 999;
 }
 
 .nav__item:hover .nav__dropdown {
-  top: 100%;
   opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
 .nav__dropdown-link {
   display: block;
-  padding: 0.6rem 1.25rem;
+  padding: 0.6rem 1.5rem;
   font-size: var(--size-sm);
   color: var(--color-text-sub);
   white-space: nowrap;
+  text-align: center;
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
 .nav__dropdown-link:hover {
-  background: var(--color-bg-section);
   color: var(--color-primary);
+  background: var(--color-bg-section);
 }
 
 /* ---- Right Controls ---- */
