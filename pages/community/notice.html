@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공지사항 | PETBALANCE</title>
+  <link rel="stylesheet" href="../../css/variables.css" />
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/nav.css" />
+  <link rel="stylesheet" href="../../css/sections.css" />
+  <style>
+    .page-hero {
+      height: 200px;
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                  url('../../assets/images/community-hero.jpg') center/cover no-repeat;
+      background-color: #1B3A5C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--nav-height);
+    }
+    .page-hero h1 {
+      font-size: var(--size-2xl);
+      color: white;
+      font-weight: 700;
+    }
+    .breadcrumb { background: #f5f5f5; border-bottom: 1px solid var(--color-border); }
+    .breadcrumb__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      padding: 0.75rem 5%; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .breadcrumb a, .breadcrumb span { font-size: var(--size-xs); color: var(--color-text-sub); }
+    .breadcrumb .sep { color: var(--color-border); }
+    .breadcrumb .current { color: var(--color-primary); font-weight: 500; }
+    .sub-nav { background: white; border-bottom: 1px solid var(--color-border); }
+    .sub-nav__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      padding: 0 5%; display: flex;
+    }
+    .sub-nav__link {
+      padding: 1rem 1.5rem; font-size: var(--size-sm);
+      color: var(--color-text-sub); border-bottom: 2px solid transparent;
+      transition: var(--transition-base); white-space: nowrap;
+    }
+    .sub-nav__link:hover, .sub-nav__link.active {
+      color: var(--color-primary); border-bottom-color: var(--color-primary);
+    }
+
+    /* 공지사항 */
+    .notice-section { padding: 4rem 0 6rem; background: white; }
+    .notice-section h2 {
+      text-align: center; font-size: var(--size-xl);
+      font-weight: 700; margin-bottom: 3rem;
+    }
+
+    /* 테이블 */
+    .notice-table {
+      width: 100%;
+      border-collapse: collapse;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .notice-table thead tr {
+      background: #f7f8fa;
+      border-top: 2px solid var(--color-primary);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .notice-table th {
+      padding: 0.9rem 1rem;
+      font-size: var(--size-xs);
+      font-weight: 600;
+      color: var(--color-text-sub);
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .notice-table th.title { text-align: left; }
+    .notice-table td {
+      padding: 1rem;
+      font-size: var(--size-sm);
+      color: var(--color-text);
+      border-bottom: 1px solid #f0f0f0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .notice-table td.title { text-align: left; }
+    .notice-table tbody tr {
+      transition: background var(--transition-base);
+      cursor: pointer;
+    }
+    .notice-table tbody tr:hover { background: #f7f8fa; }
+    .notice-table tbody tr:hover .notice-title-text {
+      color: var(--color-primary);
+    }
+    .notice-num { color: var(--color-text-light); width: 60px; }
+    .notice-title-text { transition: color var(--transition-base); }
+    .notice-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 10px;
+      font-weight: 600;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+    .badge-notice {
+      background: #EEF1F5;
+      color: var(--color-primary);
+    }
+    .badge-new {
+      background: #FEF2F2;
+      color: var(--color-accent);
+    }
+    .notice-date {
+      color: var(--color-text-light);
+      font-family: var(--font-en);
+      font-size: var(--size-xs);
+      width: 100px;
+    }
+
+    /* 페이지네이션 */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 2.5rem;
+    }
+    .page-btn {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm);
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      transition: var(--transition-base);
+      background: white;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    .page-btn.arrow { font-size: 0.75rem; }
+
+    /* 검색 */
+    .notice-search {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .notice-search select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      background: white;
+    }
+    .notice-search input {
+      flex: 1;
+      max-width: 300px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--size-sm);
+      outline: none;
+    }
+    .notice-search input:focus { border-color: var(--color-primary); }
+    .notice-search button {
+      padding: 0.5rem 1.25rem;
+      background: var(--color-primary);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-size: var(--size-sm);
+      font-weight: 600;
+      transition: var(--transition-base);
+    }
+    .notice-search button:hover { background: var(--color-primary-dark); }
+
+    @media (max-width: 768px) {
+      .notice-num, .notice-date { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">
+        <img src="../../assets/images/logo.png" alt="PetBalance" style="height:44px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span style="display:none;font-family:var(--font-en);font-size:1.35rem;font-weight:700;color:var(--color-primary);">PetBalance</span>
+      </a>
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="../../pages/petbalance/" class="nav__link">PETBALANCE</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/petbalance/about.html" class="nav__dropdown-link">소개</a>
+            <a href="../../pages/petbalance/ceo.html" class="nav__dropdown-link">CEO 인사말</a>
+            <a href="../../pages/petbalance/history.html" class="nav__dropdown-link">연혁</a>
+          </div>
+        </li>
+        <li class="nav__item"><a href="../../pages/pet-product/" class="nav__link">PET PRODUCT</a></li>
+        <li class="nav__item">
+          <a href="../../pages/pet-service/" class="nav__link">PET SERVICE</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/pet-service/" class="nav__dropdown-link">이리온몰</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/pet-advisor/" class="nav__link">PET ADVISOR</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/pet-advisor/" class="nav__dropdown-link">서비스소개</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/community/" class="nav__link active">COMMUNITY</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/community/notice.html" class="nav__dropdown-link">공지사항</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/ethics/" class="nav__link">ETHICS</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/ethics/intro.html" class="nav__dropdown-link">윤리규정소개</a>
+            <a href="../../pages/ethics/report.html" class="nav__dropdown-link">윤리신고센터</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav__controls">
+        <button class="nav__lang" id="langToggle" aria-label="언어 전환">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mega Menu -->
+  <div class="nav__mega" id="megaMenu">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-col">
+        <a href="../../pages/petbalance/about.html" class="nav__mega-link">소개</a>
+        <a href="../../pages/petbalance/ceo.html" class="nav__mega-link">CEO 인사말</a>
+        <a href="../../pages/petbalance/history.html" class="nav__mega-link">연혁</a>
+        <a href="../../pages/petbalance/factory.html" class="nav__mega-link">공장소개</a>
+        <a href="../../pages/petbalance/directions.html" class="nav__mega-link">찾아오시는길</a>
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET PRODUCT 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET SERVICE 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET ADVISOR 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/community/notice.html" class="nav__mega-link">공지사항</a>
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/ethics/intro.html" class="nav__mega-link">윤리규정소개</a>
+        <a href="../../pages/ethics/report.html" class="nav__mega-link">윤리신고센터</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-hero"><h1>COMMUNITY</h1></div>
+
+  <div class="breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="../../index.html">🏠</a>
+      <span class="sep">›</span>
+      <a href="../../pages/community/">COMMUNITY</a>
+      <span class="sep">›</span>
+      <span class="current">공지사항</span>
+    </div>
+  </div>
+
+  <div class="sub-nav">
+    <div class="sub-nav__inner">
+      <a href="notice.html" class="sub-nav__link active">공지사항</a>
+    </div>
+  </div>
+
+  <section class="notice-section">
+    <div class="container">
+      <h2>공지사항</h2>
+
+      <table class="notice-table">
+        <thead>
+          <tr>
+            <th class="notice-num">번호</th>
+            <th class="title">제목</th>
+            <th class="notice-date">날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="location.href='notice-detail.html'">
+            <td class="notice-num">5</td>
+            <td class="title">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-badge badge-new">NEW</span>
+              <span class="notice-title-text">펫발란스 홈페이지 오픈 안내</span>
+            </td>
+            <td class="notice-date">2025.01.20</td>
+          </tr>
+          <tr onclick="location.href='notice-detail.html'">
+            <td class="notice-num">4</td>
+            <td class="title">
+              <span class="notice-badge badge-notice">공지</span>
+              <span class="notice-title-text">2025년 신제품 출시 안내</span>
+            </td>
+            <td class="notice-date">2025.01.15</td>
+          </tr>
+          <tr onclick="location.href='notice-detail.html'">
+            <td class="notice-num">3</td>
+            <td class="title">
+              <span class="notice-title-text">겨울 프로모션 이벤트 안내</span>
+            </td>
+            <td class="notice-date">2025.01.08</td>
+          </tr>
+          <tr onclick="location.href='notice-detail.html'">
+            <td class="notice-num">2</td>
+            <td class="title">
+              <span class="notice-title-text">연말 유기동물 보호소 후원 활동 완료 보고</span>
+            </td>
+            <td class="notice-date">2024.12.20</td>
+          </tr>
+          <tr onclick="location.href='notice-detail.html'">
+            <td class="notice-num">1</td>
+            <td class="title">
+              <span class="notice-title-text">펫발란스 브랜드 론칭 안내</span>
+            </td>
+            <td class="notice-date">2024.12.01</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 페이지네이션 -->
+      <div class="pagination">
+        <button class="page-btn arrow">«</button>
+        <button class="page-btn arrow">‹</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn arrow">›</button>
+        <button class="page-btn arrow">»</button>
+      </div>
+
+      <!-- 검색 -->
+      <div class="notice-search">
+        <select>
+          <option>제목</option>
+          <option>내용</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요" />
+        <button>검색</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호 : 650-88-02820 | 대표 : 송명준</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script src="../../js/animations.js"></script>
+</body>
+</html>
