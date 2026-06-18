@@ -140,6 +140,18 @@ button {
   transform: translateY(-2px);
 }
 
+/* 어두운 배경(Hero 등) 위에서 쓰는 흰색 채움 버튼 */
+.btn-white {
+  background: var(--color-white);
+  color: var(--color-primary-dark);
+}
+
+.btn-white:hover {
+  background: var(--color-warm);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
 /* ---- Scroll Reveal Animations ----
    JS(animations.js)가 IntersectionObserver로
    .is-visible 클래스를 부여하면 노출됩니다. */

@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/sections.css" />
 
+  <!-- Swiper.js (ESG 보호소 카드 슬라이드) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
   <!-- Favicon (추후 교체) -->
   <!-- <link rel="icon" href="assets/images/favicon.ico" /> -->
 </head>
@@ -125,12 +128,20 @@
       <span class="side-nav__label">HOME</span>
       <span class="side-nav__dot"></span>
     </div>
-    <div class="side-nav__item" data-section="business">
-      <span class="side-nav__label">BUSINESS</span>
+    <div class="side-nav__item" data-section="brand-story">
+      <span class="side-nav__label">BRAND</span>
       <span class="side-nav__dot"></span>
     </div>
-    <div class="side-nav__item" data-section="brand">
-      <span class="side-nav__label">BRAND</span>
+    <div class="side-nav__item" data-section="product">
+      <span class="side-nav__label">PRODUCT</span>
+      <span class="side-nav__dot"></span>
+    </div>
+    <div class="side-nav__item" data-section="esg">
+      <span class="side-nav__label">ESG</span>
+      <span class="side-nav__dot"></span>
+    </div>
+    <div class="side-nav__item" data-section="news">
+      <span class="side-nav__label">NEWS</span>
       <span class="side-nav__dot"></span>
     </div>
     <div class="side-nav__item" data-section="contact">
@@ -150,19 +161,19 @@
 
     <div class="container">
       <div class="hero__content">
-        <span class="hero__eyebrow fade-in">반려동물과 함께하는</span>
+        <span class="hero__eyebrow fade-in">Since 2018 · Premium Pet Food</span>
         <h1 class="hero__title fade-up delay-1">
-          <strong>건강한 라이프스타일을<br>선도하는 펫발란스</strong>
+          <strong>반려동물의 건강한<br>내일을 만듭니다</strong>
         </h1>
         <p class="hero__sub fade-up delay-2">
           반려동물의 건강과 행복을 위한 프리미엄 솔루션
         </p>
         <div class="hero__cta fade-up delay-3">
-          <a href="pages/pet-product/" class="btn btn-primary">
-            ▶ 제품 둘러보기
+          <a href="pages/pet-product/" class="btn btn-white">
+            제품 보러가기
           </a>
           <a href="pages/petbalance/" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.5);">
-            브랜드 소개
+            브랜드 스토리
           </a>
         </div>
       </div>
@@ -173,94 +184,186 @@
   </section>
 
   <!-- ========================================================
-       SECTION 2: BUSINESS
-       wooriwa "사업영역" 섹션과 동일 구조
+       SECTION 2: BRAND STORY (수치 4개)
        ======================================================== -->
-  <section class="section section-business" id="business">
+  <section class="section-stats" id="brand-story">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="fade-up delay-1">
+          <div class="stat-number">2018</div>
+          <div class="stat-label">창립연도</div>
+        </div>
+        <div class="fade-up delay-2">
+          <div class="stat-number">21</div>
+          <div class="stat-label">제휴 보호소</div>
+        </div>
+        <div class="fade-up delay-3">
+          <div class="stat-number">50만+</div>
+          <div class="stat-label">누적 판매</div>
+        </div>
+        <div class="fade-up delay-4">
+          <div class="stat-number">8개국</div>
+          <div class="stat-label">원료 산지</div>
+        </div>
+      </div>
+      <p class="stats-phrase fade-in delay-5">
+        신뢰할 수 있는 원료, 과학적인 배합, 반려동물을 위한 진심
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 3: PET PRODUCT (3열 카드)
+       ======================================================== -->
+  <section class="section section-product" id="product">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow fade-in">Petbalance's Business</span>
-        <h2 class="section-title fade-up delay-1">펫발란스 사업영역</h2>
+        <span class="eyebrow fade-in">Our Products</span>
+        <h2 class="section-title fade-up delay-1">펫발란스 제품</h2>
         <p class="section-desc fade-up delay-2">
-          반려동물이 더 건강하고 행복한 삶의 질을 누릴 수 있도록<br>
-          차원 높은 서비스를 제공합니다.
+          엄선된 원재료로 만든 프리미엄 반려동물 식품
         </p>
       </div>
 
-      <div class="business-grid">
-        <!-- Card 1 -->
-        <a href="pages/pet-product/" class="business-card fade-up delay-1">
-          <div class="business-card__title-en">Pet Product</div>
-          <div class="business-card__title-ko">펫 푸드 / 용품</div>
-          <div class="business-card__img-wrap">
-            <!-- 이미지 교체: src="assets/images/business-product.jpg" -->
-            <img src="assets/images/placeholder-product.jpg" alt="펫 제품" loading="lazy" />
+      <div class="product-grid">
+        <div class="product-card fade-up delay-1">
+          <div class="product-card__img">
+            <img src="assets/images/product-food.jpg" alt="사료" loading="lazy" />
           </div>
-          <span class="business-card__more">Read More &rsaquo;</span>
-        </a>
+          <h3 class="product-card__title">사료</h3>
+          <p class="product-card__desc">주식용 프리미엄 사료</p>
+        </div>
+        <div class="product-card fade-up delay-2">
+          <div class="product-card__img">
+            <img src="assets/images/product-snack.jpg" alt="간식" loading="lazy" />
+          </div>
+          <h3 class="product-card__title">간식</h3>
+          <p class="product-card__desc">건강한 천연 간식</p>
+        </div>
+        <div class="product-card fade-up delay-3">
+          <div class="product-card__img">
+            <img src="assets/images/product-goods.jpg" alt="용품" loading="lazy" />
+          </div>
+          <h3 class="product-card__title">용품</h3>
+          <p class="product-card__desc">반려동물 생활용품</p>
+        </div>
+      </div>
 
-        <!-- Card 2 -->
-        <a href="pages/petbalance/factory.html" class="business-card fade-up delay-2">
-          <div class="business-card__title-en">Factory</div>
-          <div class="business-card__title-ko">반려동물 식품 제조</div>
-          <div class="business-card__img-wrap">
-            <img src="assets/images/placeholder-factory.jpg" alt="공장" loading="lazy" />
-          </div>
-          <span class="business-card__more">Read More &rsaquo;</span>
-        </a>
-
-        <!-- Card 3 -->
-        <a href="pages/pet-service/" class="business-card fade-up delay-3">
-          <div class="business-card__title-en">E-Commerce</div>
-          <div class="business-card__title-ko">온라인 커머스</div>
-          <div class="business-card__img-wrap">
-            <img src="assets/images/placeholder-ecommerce.jpg" alt="이커머스" loading="lazy" />
-          </div>
-          <span class="business-card__more">Read More &rsaquo;</span>
-        </a>
+      <div class="fade-up delay-4" style="text-align:center; margin-top: var(--space-lg);">
+        <a href="pages/pet-product/" class="btn btn-outline">전체 제품 보기</a>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       SECTION 3: BRAND / PRODUCT HIGHLIGHT
+       SECTION 4: ESG & NGO (좌우 2단 + 슬라이드)
        ======================================================== -->
-  <section class="section section-brand" id="brand">
+  <section class="section section-esg" id="esg">
     <div class="container">
-      <div class="brand-layout">
-        <div class="brand-text fade-up">
-          <span class="eyebrow">Our Brand</span>
-          <h2 class="section-title">신뢰할 수 있는<br>펫발란스 브랜드</h2>
+      <div class="esg-layout">
+        <div class="fade-up">
+          <span class="eyebrow">ESG · Social Contribution</span>
+          <h2 class="section-title">반려동물과 사람이<br>함께 사는 세상</h2>
           <p class="section-desc">
-            엄선된 원재료와 과학적 배합으로 만들어진 프리미엄 반려동물 사료.
-            반려동물의 건강한 하루를 위한 최선의 선택입니다.
+            펫발란스는 유기동물 보호소와 함께 더 나은 반려동물 문화를 만들어갑니다.
           </p>
-          <a href="pages/pet-product/" class="btn btn-outline" style="margin-top:2rem;">
-            제품 보러가기 &rsaquo;
-          </a>
+          <div class="esg-stats">
+            <div>
+              <div class="esg-stat-number">21개소</div>
+              <div class="esg-stat-label">제휴 보호소</div>
+            </div>
+            <div>
+              <div class="esg-stat-number">사회공헌</div>
+              <div class="esg-stat-label">지속 실천</div>
+            </div>
+          </div>
+          <a href="pages/community/notice.html" class="btn btn-outline">활동 더 보기 &rsaquo;</a>
         </div>
-        <div class="brand-image fade-up delay-2">
-          <!-- 이미지 교체: src="assets/images/brand-main.jpg" -->
-          <img src="assets/images/placeholder-brand.jpg" alt="펫발란스 브랜드" loading="lazy" />
+
+        <div class="fade-up delay-2">
+          <div class="swiper esg-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="shelter-card">
+                  <div class="shelter-card__img"></div>
+                  <div class="shelter-card__name">행복한발바닥 보호소</div>
+                  <div class="shelter-card__region">경기도</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="shelter-card">
+                  <div class="shelter-card__img"></div>
+                  <div class="shelter-card__name">서울유기동물센터</div>
+                  <div class="shelter-card__region">서울</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="shelter-card">
+                  <div class="shelter-card__img"></div>
+                  <div class="shelter-card__name">부산동물사랑</div>
+                  <div class="shelter-card__region">부산</div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       SECTION 4: CONTACT / CTA
+       SECTION 5: NEWS & COMMUNITY (좌우 6:4)
+       ======================================================== -->
+  <section class="section section-news" id="news">
+    <div class="container">
+      <div class="news-layout">
+        <div class="fade-up">
+          <h3 class="news-col__title">NEWS</h3>
+          <div class="news-list">
+            <a href="pages/community/notice.html" class="news-item">
+              <span class="news-date">2025.01.15</span>
+              <span class="news-title">펫발란스 신제품 출시 안내</span>
+            </a>
+            <a href="pages/community/notice.html" class="news-item">
+              <span class="news-date">2025.01.08</span>
+              <span class="news-title">겨울 프로모션 이벤트 안내</span>
+            </a>
+            <a href="pages/community/notice.html" class="news-item">
+              <span class="news-date">2024.12.20</span>
+              <span class="news-title">연말 보호소 후원 활동 완료</span>
+            </a>
+          </div>
+          <a href="pages/community/notice.html" class="news-more">전체 보기 &rsaquo;</a>
+        </div>
+
+        <div class="fade-up delay-2">
+          <h3 class="news-col__title">INSTAGRAM</h3>
+          <div class="instagram-grid">
+            <div class="instagram-placeholder"></div>
+            <div class="instagram-placeholder"></div>
+            <div class="instagram-placeholder"></div>
+            <div class="instagram-placeholder"></div>
+          </div>
+          <a href="https://instagram.com/petbalance" class="news-more" target="_blank" rel="noopener">@petbalance 팔로우 &rsaquo;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       SECTION 6: CONTACT / CTA
        ======================================================== -->
   <section class="section section-contact" id="contact">
     <div class="container">
-      <span class="eyebrow fade-in" style="color:rgba(255,255,255,0.6);">Get in Touch</span>
       <h2 class="section-title fade-up delay-1">펫발란스와 함께하세요</h2>
       <p class="section-desc fade-up delay-2">
-        제품 문의, 유통 제안, 협업 요청 — 언제든지 연락 주세요.
+        입점 및 유통 제안, 제품 문의를 환영합니다
       </p>
       <div class="contact-links fade-up delay-3">
-        <a href="pages/community/notice.html" class="contact-link primary">공지사항 보기</a>
-        <a href="mailto:info@petbalance.co.kr" class="contact-link">이메일 문의</a>
-        <a href="pages/petbalance/directions.html" class="contact-link">찾아오시는길</a>
+        <a href="pages/petbalance/directions.html" class="contact-link btn-accent">입점 · 유통 문의</a>
+        <a href="tel:010-3056-2776" class="contact-link">고객센터 010-3056-2776</a>
+        <a href="https://smartstore.naver.com/petbalance" class="contact-link" target="_blank" rel="noopener">스마트스토어 바로가기</a>
       </div>
     </div>
   </section>
@@ -327,6 +430,8 @@
   <!-- JS -->
   <script src="js/nav.js"></script>
   <script src="js/animations.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="js/sliders.js"></script>
 
 </body>
 </html>

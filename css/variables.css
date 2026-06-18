@@ -20,8 +20,12 @@
   --color-text-light: #999999;
   --color-border: #E0E0E0;
 
+  /* Accent surfaces */
+  --color-warm: #F5F0E8;
+  --color-green: #2E7D4F;
+
   /* Dark surfaces (footer, contact CTA) */
-  --color-dark: #14201C;
+  --color-dark: #111827;
   --color-dark-text: rgba(255, 255, 255, 0.7);
   --color-dark-border: rgba(255, 255, 255, 0.1);
 

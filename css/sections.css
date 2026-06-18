@@ -1,6 +1,6 @@
 /* ============================================
    PETBALANCE — Main Sections
-   Hero / Business / Brand / Contact / Footer
+   Hero / Brand Story / Product / ESG / News / Contact / Footer
    ============================================ */
 
 /* ---- 1. Hero (풀스크린) ---- */
@@ -102,118 +102,232 @@
   50% { transform: translate(-50%, 8px); }
 }
 
-/* ---- 2. Business (3카드 그리드) ---- */
-.section-business {
+/* ---- 2. Brand Story (수치 4개 + 문구) ---- */
+.section-stats {
+  background: #1B3A5C;
+  color: white;
+  padding: 5rem 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.stat-number {
+  font-family: var(--font-en);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: var(--size-sm);
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.05em;
+}
+
+.stats-phrase {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: var(--size-sm);
+  letter-spacing: 0.1em;
+}
+
+/* ---- 3. Pet Product (3열 카드) ---- */
+.section-product {
   padding: var(--space-xl) 0;
   background: var(--color-white);
 }
 
-.business-grid {
+.product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
 
-.business-card {
-  position: relative;
-  display: block;
-  min-height: 380px;
+.product-card__img {
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--color-bg-section);
-  box-shadow: var(--shadow-card);
-  transition: var(--transition-base);
+  margin-bottom: var(--space-sm);
 }
 
-.business-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.business-card__title-en {
-  position: absolute;
-  z-index: 2;
-  top: 1.75rem;
-  left: 1.75rem;
-  font-family: var(--font-en);
-  font-weight: 700;
-  font-size: var(--size-lg);
-  color: var(--color-white);
-}
-
-.business-card__title-ko {
-  position: absolute;
-  z-index: 2;
-  top: 3.5rem;
-  left: 1.75rem;
-  font-size: var(--size-sm);
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.business-card__img-wrap {
-  position: absolute;
-  inset: 0;
-}
-
-.business-card__img-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.1) 55%);
-}
-
-.business-card__img-wrap img {
+.product-card__img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s var(--ease-out);
 }
 
-.business-card:hover .business-card__img-wrap img {
-  transform: scale(1.08);
+.product-card:hover .product-card__img img {
+  transform: scale(1.06);
 }
 
-.business-card__more {
-  position: absolute;
-  z-index: 2;
-  bottom: 1.75rem;
-  left: 1.75rem;
+.product-card__title {
+  font-size: var(--size-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.4rem;
+}
+
+.product-card__desc {
   font-size: var(--size-sm);
-  font-weight: 600;
-  color: var(--color-white);
+  color: var(--color-text-sub);
 }
 
-/* ---- 3. Brand (좌우 2단) ---- */
-.section-brand {
-  padding: var(--space-xl) 0;
-  background: var(--color-bg-section);
+/* ---- 4. ESG & NGO (좌우 2단 + 슬라이드) ---- */
+.section-esg {
+  background: #F5F0E8;
+  padding: 6rem 0;
 }
 
-.brand-layout {
+.esg-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
   align-items: center;
-  gap: var(--space-lg);
 }
 
-.brand-image {
-  border-radius: var(--radius-lg);
+.esg-stats {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.esg-stat-number {
+  font-family: var(--font-en);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2E7D4F;
+}
+
+.esg-stat-label {
+  font-size: var(--size-xs);
+  color: var(--color-text-sub);
+}
+
+.esg-swiper {
+  padding-bottom: 2.5rem;
+}
+
+.shelter-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  aspect-ratio: 4 / 3;
 }
 
-.brand-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.shelter-card__img {
+  height: 220px;
+  background: var(--color-border);
 }
 
-/* ---- 4. Contact (CTA) ---- */
+.shelter-card__name {
+  padding: 1rem 1.25rem 0.25rem;
+  font-weight: 700;
+  font-size: var(--size-md);
+  color: var(--color-text);
+}
+
+.shelter-card__region {
+  padding: 0 1.25rem 1.25rem;
+  font-size: var(--size-sm);
+  color: var(--color-text-sub);
+}
+
+.esg-swiper .swiper-pagination-bullet-active {
+  background: #2E7D4F;
+}
+
+/* ---- 5. News & Community (좌우 6:4) ---- */
+.section-news {
+  background: #F7F8FA;
+  padding: 6rem 0;
+}
+
+.news-layout {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  gap: 4rem;
+}
+
+.news-col__title {
+  font-family: var(--font-en);
+  font-size: var(--size-lg);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-base);
+  cursor: pointer;
+}
+
+.news-item:hover .news-title {
+  color: var(--color-primary);
+}
+
+.news-date {
+  font-family: var(--font-en);
+  font-size: var(--size-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+.news-title {
+  font-size: var(--size-sm);
+  color: var(--color-text);
+  transition: color var(--transition-base);
+}
+
+.news-more {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: var(--size-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.news-more:hover {
+  color: var(--color-primary-dark);
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.instagram-placeholder {
+  aspect-ratio: 1;
+  background: var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- 6. Contact (CTA) ---- */
 .section-contact {
   padding: var(--space-xl) 0;
-  background: var(--color-primary-dark);
+  background: var(--color-dark);
   color: var(--color-white);
   text-align: center;
 }
@@ -249,14 +363,15 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-.contact-link.primary {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-text);
+.contact-links .btn-accent {
+  background: #C8202E;
+  color: white;
+  border-color: #C8202E;
 }
 
-.contact-link.primary:hover {
-  background: var(--color-accent-dark);
+.contact-links .btn-accent:hover {
+  background: #A01820;
+  border-color: #A01820;
 }
 
 /* ---- Footer (5컬럼 그리드, 다크 배경) ---- */
@@ -388,8 +503,23 @@
    1024px / 768px
    ============================================ */
 @media (max-width: 1024px) {
-  .business-grid {
+  .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .esg-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .news-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
   .footer__top {
@@ -398,16 +528,17 @@
 }
 
 @media (max-width: 768px) {
-  .business-grid {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
     grid-template-columns: 1fr;
   }
 
-  .brand-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-image {
-    order: -1;
+  .esg-stats {
+    flex-wrap: wrap;
+    gap: 1.25rem;
   }
 
   .hero__cta {
