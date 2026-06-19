@@ -344,47 +344,46 @@
   <script src="../../js/nav.js"></script>
   <script src="../../js/animations.js"></script>
   <script>
-    /* Notion API 키는 클라이언트에 두지 않고, 서버 측 프록시
-       (functions/api/notices.js, Cloudflare Pages Function)를 통해
-       호출합니다. */
-    async function loadNotices() {
-      const tbody = document.getElementById('noticeList');
-      try {
-        const res = await fetch('/api/notices');
-        const data = await res.json();
+const DATABASE_ID = '3838d4902351802e979cee3be887c25c';
 
-        if (!data.results || data.results.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--color-text-light);">등록된 공지사항이 없습니다.</td></tr>';
-          return;
-        }
+async function loadNotices() {
+  const tbody = document.getElementById('noticeList');
+  try {
+    const res = await fetch('/api/notices');
+    const data = await res.json();
 
-        tbody.innerHTML = data.results.map((page, i) => {
-          const title = page.properties['제목']?.title?.[0]?.plain_text || '(제목 없음)';
-          const date = page.properties['날짜']?.date?.start || '';
-          const category = page.properties['카테고리']?.select?.name || '';
-          const num = data.results.length - i;
-          const isNew = date && (new Date() - new Date(date)) < 7 * 24 * 60 * 60 * 1000;
-
-          return `
-            <tr onclick="window.open('${page.url}', '_blank')" style="cursor:pointer;">
-              <td class="notice-num">${num}</td>
-              <td class="title">
-                ${category ? `<span class="notice-badge badge-notice">${category}</span>` : ''}
-                ${isNew ? `<span class="notice-badge badge-new">NEW</span>` : ''}
-                <span class="notice-title-text">${title}</span>
-              </td>
-              <td class="notice-date">${date ? date.replaceAll('-', '.') : ''}</td>
-            </tr>
-          `;
-        }).join('');
-
-      } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--color-text-light);">공지사항을 불러올 수 없습니다.</td></tr>';
-        console.error(err);
-      }
+    if (!data.results || data.results.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--color-text-light);">등록된 공지사항이 없습니다.</td></tr>';
+      return;
     }
 
-    loadNotices();
-  </script>
+    tbody.innerHTML = data.results.map((page, i) => {
+      const title = page.properties['제목']?.title?.[0]?.plain_text || '(제목 없음)';
+      const date = page.properties['날짜']?.date?.start || '';
+      const category = page.properties['카테고리']?.select?.name || '';
+      const num = data.results.length - i;
+      const isNew = date && (new Date() - new Date(date)) < 7 * 24 * 60 * 60 * 1000;
+
+      return `
+        <tr onclick="window.open('${page.url}', '_blank')" style="cursor:pointer;">
+          <td class="notice-num">${num}</td>
+          <td class="title">
+            ${category ? `<span class="notice-badge badge-notice">${category}</span>` : ''}
+            ${isNew ? `<span class="notice-badge badge-new">NEW</span>` : ''}
+            <span class="notice-title-text">${title}</span>
+          </td>
+          <td class="notice-date">${date ? date.replaceAll('-', '.') : ''}</td>
+        </tr>
+      `;
+    }).join('');
+
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:3rem;color:var(--color-text-light);">공지사항을 불러올 수 없습니다.</td></tr>';
+    console.error(err);
+  }
+}
+
+loadNotices();
+</script>
 </body>
 </html>
