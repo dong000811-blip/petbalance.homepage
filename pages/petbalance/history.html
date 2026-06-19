@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>연혁 | PETBALANCE</title>
+  <link rel="stylesheet" href="../../css/variables.css" />
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/nav.css" />
+  <link rel="stylesheet" href="../../css/sections.css" />
+  <style>
+    .page-hero {
+      height: 200px;
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                  url('../../assets/images/about-hero.jpg') center/cover no-repeat;
+      background-color: #1B3A5C;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: var(--nav-height);
+    }
+    .page-hero h1 { font-size: var(--size-2xl); color: white; font-weight: 700; }
+    .breadcrumb { background: #f5f5f5; border-bottom: 1px solid var(--color-border); }
+    .breadcrumb__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      padding: 0.75rem 5%; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .breadcrumb a, .breadcrumb span { font-size: var(--size-xs); color: var(--color-text-sub); }
+    .breadcrumb .sep { color: var(--color-border); }
+    .breadcrumb .current { color: var(--color-primary); font-weight: 500; }
+    .sub-nav { background: white; border-bottom: 1px solid var(--color-border); }
+    .sub-nav__inner { max-width: var(--max-width); margin: 0 auto; padding: 0 5%; display: flex; }
+    .sub-nav__link {
+      padding: 1rem 1.5rem; font-size: var(--size-sm);
+      color: var(--color-text-sub); border-bottom: 2px solid transparent;
+      transition: var(--transition-base); white-space: nowrap;
+    }
+    .sub-nav__link:hover, .sub-nav__link.active {
+      color: var(--color-primary); border-bottom-color: var(--color-primary);
+    }
+
+    /* 상단 배너 */
+    .history-banner {
+      position: relative;
+      margin: 3rem auto;
+      max-width: 860px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 200px;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('../../assets/images/history-banner.jpg') center/cover no-repeat;
+      background-color: #1B3A5C;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .history-banner h2 {
+      font-size: var(--size-xl);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.75rem;
+      word-break: keep-all;
+    }
+    .history-banner p {
+      font-size: var(--size-sm);
+      color: rgba(255,255,255,0.8);
+      word-break: keep-all;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+    .history-banner__logo {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px; height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-size: 1.2rem;
+    }
+
+    /* 타임라인 */
+    .history-section { padding: 4rem 0 6rem; background: white; }
+    .history-section h2 {
+      text-align: center; font-size: var(--size-xl);
+      font-weight: 700; margin-bottom: 1rem;
+    }
+    .timeline {
+      max-width: 860px;
+      margin: 4rem auto 0;
+      position: relative;
+    }
+    /* 중앙 세로선 */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    /* 중앙 도트 */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0.4rem;
+      width: 12px; height: 12px;
+      background: var(--color-primary);
+      border: 3px solid white;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 2px var(--color-primary);
+      z-index: 1;
+    }
+
+    .timeline-left {
+      padding-right: 3rem;
+      text-align: right;
+    }
+    .timeline-right {
+      padding-left: 3rem;
+      text-align: left;
+    }
+    .timeline-empty { /* 빈 칸 */ }
+
+    .timeline-year {
+      font-family: var(--font-en);
+      font-size: var(--size-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-events {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .timeline-event {
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      line-height: 1.6;
+    }
+    .timeline-event::before {
+      content: '· ';
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before { left: 1rem; }
+      .timeline-item { grid-template-columns: 1fr; padding-left: 2.5rem; }
+      .timeline-item::before { left: 1rem; }
+      .timeline-left, .timeline-right { padding: 0; text-align: left; }
+      .timeline-empty { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">
+        <img src="../../assets/images/logo.png" alt="PetBalance" style="height:44px;width:auto;"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none;font-family:var(--font-en);font-size:1.35rem;font-weight:700;color:var(--color-primary);">PetBalance</span>
+      </a>
+      <ul class="nav__menu">
+        <li class="nav__item"><a href="../../pages/petbalance/" class="nav__link active">PETBALANCE</a></li>
+        <li class="nav__item"><a href="../../pages/pet-product/" class="nav__link">PET PRODUCT</a></li>
+        <li class="nav__item"><a href="../../pages/pet-service/" class="nav__link">PET SERVICE</a></li>
+        <li class="nav__item"><a href="../../pages/pet-advisor/" class="nav__link">PET ADVISOR</a></li>
+        <li class="nav__item"><a href="../../pages/community/" class="nav__link">COMMUNITY</a></li>
+        <li class="nav__item"><a href="../../pages/ethics/" class="nav__link">ETHICS</a></li>
+      </ul>
+      <div class="nav__controls">
+        <button class="nav__lang">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-hero"><h1>PETBALANCE</h1></div>
+
+  <div class="breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="../../index.html">🏠</a>
+      <span class="sep">›</span>
+      <a href="about.html">PETBALANCE</a>
+      <span class="sep">›</span>
+      <span class="current">연혁</span>
+    </div>
+  </div>
+
+  <div class="sub-nav">
+    <div class="sub-nav__inner">
+      <a href="about.html" class="sub-nav__link">소개</a>
+      <a href="ceo.html" class="sub-nav__link">CEO 인사말</a>
+      <a href="history.html" class="sub-nav__link active">연혁</a>
+      <a href="factory.html" class="sub-nav__link">공장소개</a>
+      <a href="directions.html" class="sub-nav__link">찾아오시는길</a>
+    </div>
+  </div>
+
+  <section class="history-section">
+    <div class="container">
+      <h2>연혁</h2>
+
+      <!-- 상단 배너 -->
+      <div class="history-banner fade-in">
+        <h2>반려동물 산업의 발전을 이끄는 펫발란스</h2>
+        <p>신뢰할 수 있는 원료와 과학적 배합으로<br>반려동물의 건강한 내일을 만들어가고 있습니다.</p>
+        <div class="history-banner__logo">🐾</div>
+      </div>
+
+      <!-- 타임라인 -->
+      <div class="timeline">
+
+        <!-- 2024 -->
+        <div class="timeline-item fade-up">
+          <div class="timeline-empty"></div>
+          <div class="timeline-right">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-events">
+              <span class="timeline-event">펫발란스 브랜드 공식 론칭</span>
+              <span class="timeline-event">네이버 스마트스토어 오픈</span>
+              <span class="timeline-event">쿠팡 로켓그로스 입점</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="timeline-item fade-up delay-1">
+          <div class="timeline-left">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-events">
+              <span class="timeline-event">MJ Holdings 주식회사 설립</span>
+              <span class="timeline-event">반려동물 식품 연구개발 착수</span>
+              <span class="timeline-event">원료 파트너십 체결 (국내외 8개국)</span>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="timeline-item fade-up delay-2">
+          <div class="timeline-empty"></div>
+          <div class="timeline-right">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-events">
+              <span class="timeline-event">유기동물 보호소 제휴 프로그램 시작</span>
+              <span class="timeline-event">첫 제휴 보호소 5개소 협약 체결</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2021 -->
+        <div class="timeline-item fade-up delay-3">
+          <div class="timeline-left">
+            <div class="timeline-year">2021</div>
+            <div class="timeline-events">
+              <span class="timeline-event">프리미엄 사료 레시피 개발 완료</span>
+              <span class="timeline-event">HACCP 인증 획득</span>
+              <span class="timeline-event">시제품 출시 및 소비자 테스트</span>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+        <!-- 2020 -->
+        <div class="timeline-item fade-up delay-4">
+          <div class="timeline-empty"></div>
+          <div class="timeline-right">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-events">
+              <span class="timeline-event">반려동물 식품 시장 조사 및 분석</span>
+              <span class="timeline-event">ESG 경영 방침 수립</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2018 -->
+        <div class="timeline-item fade-up delay-5">
+          <div class="timeline-left">
+            <div class="timeline-year">2018</div>
+            <div class="timeline-events">
+              <span class="timeline-event">창업 준비 시작</span>
+              <span class="timeline-event">반려동물 산업 진출 결정</span>
+            </div>
+          </div>
+          <div class="timeline-empty"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호 : 650-88-02820 | 대표 : 송명준</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script src="../../js/animations.js"></script>
+</body>
+</html>
