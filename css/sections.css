@@ -177,42 +177,191 @@
   50% { transform: translate(-50%, 8px); }
 }
 
-/* ---- 2. Brand Story (수치 4개 + 문구) ---- */
+/* ── Brand Story / Stats Tabs ── */
 .section-stats {
-  background: #1B3A5C;
+  background: linear-gradient(135deg, #1B3A5C 0%, #0F2340 100%);
   color: white;
-  padding: 5rem 0;
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.stats-grid {
+/* 탭 버튼 */
+.stats-tabs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  text-align: center;
+  gap: 1rem;
   margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 2rem;
 }
 
-.stat-number {
-  font-family: var(--font-en);
-  font-size: clamp(1.8rem, 3vw, 2.75rem);
-  font-weight: 700;
+.stats-tab {
+  background: transparent;
+  border: none;
+  text-align: center;
+  padding: 1.25rem 0.5rem;
+  cursor: pointer;
+  position: relative;
+  color: rgba(255,255,255,0.4);
+  transition: var(--transition-base);
+}
+
+.stats-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: var(--color-accent);
+  transition: width 0.3s var(--ease-out);
+}
+
+.stats-tab:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+.stats-tab.active {
   color: white;
+}
+
+.stats-tab.active::after {
+  width: 60%;
+}
+
+.stats-tab .stat-number {
+  font-family: var(--font-en);
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-weight: 700;
   line-height: 1.1;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
+  color: inherit;
+  transition: var(--transition-base);
 }
 
-.stat-label {
-  font-size: var(--size-sm);
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 0.05em;
+.stats-tab.active .stat-number {
+  color: var(--color-accent);
 }
 
-.stats-phrase {
-  text-align: center;
-  color: rgba(255,255,255,0.5);
+.stats-tab .stat-label {
   font-size: var(--size-sm);
-  letter-spacing: 0.1em;
+  color: inherit;
+  opacity: 0.85;
+  margin-bottom: 0.25rem;
+}
+
+.stats-tab .stat-meta {
+  font-family: var(--font-en);
+  font-size: 10px;
+  color: inherit;
+  opacity: 0.5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 콘텐츠 패널 */
+.stats-panels {
+  position: relative;
+  min-height: 420px;
+}
+
+.stats-panel {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  animation: fadeInPanel 0.5s var(--ease-out);
+}
+
+.stats-panel.active {
+  display: grid;
+}
+
+@keyframes fadeInPanel {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.panel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panel-image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: rgba(255,255,255,0.2);
+}
+
+.panel-image img:not([style*="display: none"]) ~ .panel-image-placeholder {
+  display: none;
+}
+
+.panel-text {
+  color: white;
+}
+
+.panel-eyebrow {
+  font-family: var(--font-en);
+  font-size: var(--size-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.panel-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.panel-desc {
+  font-size: var(--size-base);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1rem;
+  word-break: keep-all;
+}
+
+.panel-desc strong {
+  color: white;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .stats-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .stats-panel { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 /* ---- 3. Pet Product (3열 카드) ---- */
@@ -579,11 +728,6 @@
    1024px / 768px
    ============================================ */
 @media (max-width: 1024px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1.5rem;
-  }
-
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -604,10 +748,6 @@
 }
 
 @media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .product-grid {
     grid-template-columns: 1fr;
   }
