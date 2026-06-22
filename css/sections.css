@@ -209,41 +209,70 @@
   background: var(--color-white);
 }
 
-.product-grid {
+.business-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
 
-.product-card__img {
+.business-card {
+  display: block;
+  color: inherit;
+}
+
+.business-card__img-wrap {
+  position: relative;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-bg-section);
   margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f8fa;
 }
 
-.product-card__img img {
+.business-card__img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s var(--ease-out);
 }
 
-.product-card:hover .product-card__img img {
+.business-card:hover .business-card__img-wrap img {
   transform: scale(1.06);
 }
 
-.product-card__title {
+.business-card__img-wrap.no-img::after {
+  content: '🐾';
+  font-size: 3rem;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.business-card__title-en {
   font-size: var(--size-lg);
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.4rem;
 }
 
-.product-card__desc {
+.business-card__title-ko {
   font-size: var(--size-sm);
   color: var(--color-text-sub);
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+.business-card__more {
+  font-size: var(--size-xs);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
 }
 
 /* ---- 4. ESG & NGO (좌우 2단 + 슬라이드) ---- */
@@ -572,7 +601,7 @@
     gap: 2rem 1.5rem;
   }
 
-  .product-grid {
+  .business-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -596,7 +625,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .product-grid {
+  .business-grid {
     grid-template-columns: 1fr;
   }
 
