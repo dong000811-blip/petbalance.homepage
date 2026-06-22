@@ -3,198 +3,281 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>소개 | PETBALANCE</title>
+  <title>기업개요 | PETBALANCE</title>
   <link rel="stylesheet" href="../../css/variables.css" />
   <link rel="stylesheet" href="../../css/base.css" />
   <link rel="stylesheet" href="../../css/nav.css" />
   <link rel="stylesheet" href="../../css/sections.css" />
   <style>
-    /* 페이지 히어로 배너 */
-    .page-hero {
-      height: 200px;
-      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-                  url('../../assets/images/about-hero.jpg') center/cover no-repeat;
-      background-color: #1B3A5C;
+    /* 풀스크롤 페이지 공통 */
+    .about-section {
+      min-height: 100vh;
+      padding: calc(var(--nav-height) + 4rem) 0 4rem;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-top: var(--nav-height);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-container {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    .about-eyebrow {
+      font-family: var(--font-en);
+      font-size: var(--size-sm);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .about-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      word-break: keep-all;
+    }
+    .about-desc {
+      font-size: var(--size-md);
+      line-height: 1.9;
+      color: var(--color-text-sub);
+      max-width: 700px;
+      word-break: keep-all;
+    }
+
+    /* 섹션 1: 메인 비주얼 */
+    .section-main {
+      background: linear-gradient(135deg, #0F2340 0%, #1B3A5C 60%, #2A5280 100%);
+      color: white;
+    }
+    .section-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('../../assets/images/about-main.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .section-main .about-container {
+      position: relative;
+      z-index: 1;
       text-align: center;
     }
-    .page-hero h1 {
-      font-size: var(--size-2xl);
-      color: white;
+    .section-main .about-title { color: white; }
+    .section-main .about-desc { color: rgba(255,255,255,0.85); margin: 0 auto; }
+
+    /* 섹션 2: CEO 메시지 */
+    .section-ceo {
+      background: var(--color-warm, #F5F0E8);
+    }
+    .ceo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .ceo-photo {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #1B3A5C, #2A5280);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 5rem;
+      overflow: hidden;
+    }
+    .ceo-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .ceo-quote {
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      margin-bottom: 2rem;
+      word-break: keep-all;
     }
-
-    /* 브레드크럼 */
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #f5f5f5;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .breadcrumb__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: var(--section-padding);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .breadcrumb a, .breadcrumb span {
-      font-size: var(--size-xs);
-      color: var(--color-text-sub);
-    }
-    .breadcrumb a:hover { color: var(--color-primary); }
-    .breadcrumb .sep { color: var(--color-border); }
-    .breadcrumb .current { color: var(--color-primary); font-weight: 500; }
-
-    /* 서브 네비 탭 */
-    .sub-nav {
-      background: white;
-      border-bottom: 1px solid var(--color-border);
-    }
-    .sub-nav__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: var(--section-padding);
-      display: flex;
-      gap: 0;
-    }
-    .sub-nav__link {
-      padding: 1rem 1.5rem;
+    .ceo-quote strong { color: var(--color-primary); }
+    .ceo-name {
       font-size: var(--size-sm);
       color: var(--color-text-sub);
-      border-bottom: 2px solid transparent;
-      transition: var(--transition-base);
-      white-space: nowrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
     }
-    .sub-nav__link:hover,
-    .sub-nav__link.active {
-      color: var(--color-primary);
-      border-bottom-color: var(--color-primary);
-    }
+    .ceo-name strong { color: var(--color-text); font-size: var(--size-base); }
 
-    /* 소개 텍스트 */
-    .about-section {
-      padding: 5rem 0;
+    /* 섹션 3: 핵심 가치 */
+    .section-values {
       background: white;
     }
-    .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
-    .about-content h2 {
-      font-size: var(--size-xl);
-      font-weight: 700;
-      color: var(--color-text);
-      margin-bottom: 1.5rem;
-      line-height: 1.3;
-      word-break: keep-all;
-    }
-    .about-content p {
-      font-size: var(--size-base);
-      color: var(--color-text-sub);
-      line-height: 1.9;
-      margin-bottom: 1.25rem;
-      word-break: keep-all;
-    }
-
-    /* 비즈니스 영역 */
-    .business-section {
-      padding: 5rem 0;
-      background: #f7f8fa;
-    }
-    .business-diagram {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .biz-card {
-      background: white;
+    .value-card {
+      padding: 2.5rem 2rem;
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      width: 240px;
-      box-shadow: var(--shadow-card);
+      border-radius: var(--radius-lg);
+      transition: var(--transition-base);
+      background: white;
     }
-    .biz-card__icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--color-bg-section);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      font-size: 1.5rem;
+    .value-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
     }
-    .biz-card__title {
+    .value-num {
       font-family: var(--font-en);
-      font-size: var(--size-md);
+      font-size: var(--size-sm);
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .value-title {
+      font-size: var(--size-lg);
       font-weight: 700;
       color: var(--color-text);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
-    .biz-card__desc {
-      font-size: var(--size-xs);
+    .value-desc {
+      font-size: var(--size-sm);
       color: var(--color-text-sub);
       line-height: 1.7;
     }
-    .biz-arrow {
-      font-size: 1.5rem;
-      color: var(--color-border);
-      padding: 0 1rem;
+
+    /* 섹션 4: 사업 영역 */
+    .section-business-area {
+      background: #f7f8fa;
     }
-    .biz-center {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+    .biz-area-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .biz-area-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-base);
+    }
+    .biz-area-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .biz-area-img {
+      aspect-ratio: 16/9;
       background: linear-gradient(135deg, #1B3A5C, #2A5280);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 3rem;
+    }
+    .biz-area-body { padding: 2rem; }
+    .biz-area-title {
+      font-family: var(--font-en);
+      font-size: var(--size-lg);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .biz-area-sub {
+      font-size: var(--size-xs);
+      color: var(--color-accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .biz-area-desc {
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      line-height: 1.7;
+    }
+
+    /* 섹션 5: 연혁 하이라이트 */
+    .section-history {
+      background: linear-gradient(135deg, #1B3A5C, #0F2340);
+      color: white;
+    }
+    .section-history .about-title { color: white; }
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .history-item {
+      padding: 2rem 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .history-year {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+    .history-event {
+      font-size: var(--size-sm);
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+
+    /* 섹션 6: 인증 / 파트너 */
+    .section-certs { background: white; }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .cert-card {
+      aspect-ratio: 4/5;
+      background: #f7f8fa;
+      border-radius: var(--radius-md);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
-      margin: 0 1.5rem;
-      flex-shrink: 0;
-      box-shadow: 0 8px 32px rgba(27,58,92,0.3);
+      text-align: center;
+      padding: 1.5rem;
+      transition: var(--transition-base);
     }
-    .biz-center__name {
+    .cert-card:hover {
+      background: white;
+      box-shadow: var(--shadow-card);
+    }
+    .cert-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+    .cert-name {
+      font-size: var(--size-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.3rem;
+    }
+    .cert-year {
       font-family: var(--font-en);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    .biz-center__sub {
-      font-size: 10px;
-      opacity: 0.7;
-      margin-top: 2px;
+      font-size: var(--size-xs);
+      color: var(--color-text-light);
     }
 
-    /* 반응형: 768px 이하에서는 다이어그램을 세로로 배치 */
     @media (max-width: 768px) {
-      .business-diagram {
-        flex-direction: column;
+      .ceo-layout, .values-grid, .biz-area-grid, .history-grid, .certs-grid {
+        grid-template-columns: 1fr;
       }
-      .biz-card {
-        width: 100%;
-        max-width: 280px;
-      }
-      .biz-arrow {
-        transform: rotate(90deg);
-        padding: 0.5rem 0;
-      }
+      .history-grid { grid-template-columns: repeat(2, 1fr); }
+      .certs-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -287,85 +370,212 @@
     </div>
   </div>
 
-  <!-- 페이지 히어로 -->
-  <div class="page-hero">
-    <h1>PETBALANCE</h1>
-  </div>
-
-  <!-- 브레드크럼 -->
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner">
-      <a href="../../index.html">🏠</a>
-      <span class="sep">›</span>
-      <a href="../../pages/petbalance/">PETBALANCE</a>
-      <span class="sep">›</span>
-      <span class="current">소개</span>
-    </div>
-  </div>
-
-  <!-- 서브 네비 -->
-  <div class="sub-nav">
-    <div class="sub-nav__inner">
-      <a href="about.html" class="sub-nav__link active">소개</a>
-      <a href="ceo.html" class="sub-nav__link">CEO 인사말</a>
-      <a href="history.html" class="sub-nav__link">연혁</a>
-      <a href="factory.html" class="sub-nav__link">공장소개</a>
-      <a href="directions.html" class="sub-nav__link">찾아오시는길</a>
-    </div>
-  </div>
-
-  <!-- 소개 텍스트 -->
-  <section class="about-section">
-    <div class="container">
-      <div class="about-content fade-up">
-        <h2>반려동물과 함께하는<br>건강한 라이프스타일을 선도하는 펫발란스</h2>
-        <p>
-          펫발란스는 2018년 설립 이래, 반려동물의 건강과 행복을 최우선 가치로 삼아
-          프리미엄 반려동물 식품과 용품을 연구·개발하고 있습니다.
-          8개국에서 엄선한 원재료와 과학적인 영양 배합을 통해
-          반려동물이 더욱 건강하고 활기찬 삶을 누릴 수 있도록 최선을 다합니다.
-        </p>
-        <p>
-          현재 전국 21개 유기동물 보호소와 제휴를 맺고 사회공헌 활동을 지속적으로 펼치며,
-          반려동물과 사람이 함께 행복한 세상을 만들기 위해 노력하고 있습니다.
-        </p>
-        <p>
-          펫발란스는 단순한 제품 공급을 넘어, 반려동물 문화를 선도하는
-          종합 라이프스타일 브랜드로 성장해 나가겠습니다.
-        </p>
-      </div>
+  <!-- 섹션 1: 메인 비주얼 -->
+  <section class="about-section section-main">
+    <div class="about-container">
+      <span class="about-eyebrow fade-in">PETBALANCE · About Us</span>
+      <h1 class="about-title fade-up delay-1">
+        반려동물 산업의<br>미래를 만들어가는 펫발란스
+      </h1>
+      <p class="about-desc fade-up delay-2">
+        2018년 창립 이래, 펫발란스는 반려동물의 건강한 삶과<br>
+        보호자의 행복을 위한 프리미엄 솔루션을 제공해왔습니다.
+      </p>
     </div>
   </section>
 
-  <!-- 비즈니스 영역 -->
-  <section class="business-section">
-    <div class="container">
-      <div class="business-diagram fade-up">
-        <div class="biz-card">
-          <div class="biz-card__icon">🐾</div>
-          <div class="biz-card__title">PET FOOD</div>
-          <div class="biz-card__desc">
-            8개국 엄선 원재료로<br>만든 프리미엄 사료와<br>건강한 천연 간식
-          </div>
+  <!-- 섹션 2: CEO 메시지 -->
+  <section class="about-section section-ceo">
+    <div class="about-container">
+      <div class="ceo-layout">
+        <div class="ceo-photo fade-in">
+          <span>👤</span>
         </div>
-        <div class="biz-arrow">→</div>
-        <div class="biz-center">
-          <div class="biz-center__name">PET<br>BALANCE</div>
-          <div class="biz-center__sub">펫발란스</div>
-        </div>
-        <div class="biz-arrow">→</div>
-        <div class="biz-card">
-          <div class="biz-card__icon">🛒</div>
-          <div class="biz-card__title">E-COMMERCE</div>
-          <div class="biz-card__desc">
-            네이버 스마트스토어,<br>쿠팡 등 주요 채널을<br>통한 온라인 유통
+        <div>
+          <span class="about-eyebrow fade-up">CEO Message</span>
+          <h2 class="about-title fade-up delay-1" style="font-size: clamp(1.5rem, 3vw, 2.5rem);">
+            반려동물과 사람이<br>함께 행복한 세상
+          </h2>
+          <p class="ceo-quote fade-up delay-2">
+            "반려동물은 더 이상 동물이 아닌 <strong>가족</strong>입니다.<br>
+            펫발란스는 그 가족의 건강과 행복을 책임지는<br>
+            <strong>신뢰의 파트너</strong>가 되겠습니다."
+          </p>
+          <div class="ceo-name fade-up delay-3">
+            MJ Holdings 주식회사<br>
+            <strong>대표이사 송명준</strong>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- 섹션 3: 핵심 가치 -->
+  <section class="about-section section-values">
+    <div class="about-container">
+      <span class="about-eyebrow fade-in">Our Values</span>
+      <h2 class="about-title fade-up delay-1">펫발란스의 약속</h2>
+      <p class="about-desc fade-up delay-2">
+        우리는 세 가지 가치를 기반으로 모든 결정을 내립니다.
+      </p>
+
+      <div class="values-grid">
+        <div class="value-card fade-up delay-1">
+          <div class="value-num">01</div>
+          <div class="value-title">건강 우선</div>
+          <div class="value-desc">
+            반려동물의 건강을 최우선으로 생각하며,
+            수의영양학에 기반한 과학적인 레시피를 개발합니다.
+          </div>
+        </div>
+        <div class="value-card fade-up delay-2">
+          <div class="value-num">02</div>
+          <div class="value-title">신뢰의 품질</div>
+          <div class="value-desc">
+            8개국에서 엄선한 프리미엄 원재료와
+            HACCP 인증 시설에서 안전하게 생산됩니다.
+          </div>
+        </div>
+        <div class="value-card fade-up delay-3">
+          <div class="value-num">03</div>
+          <div class="value-title">사회적 책임</div>
+          <div class="value-desc">
+            21개 유기동물 보호소와의 제휴를 통해
+            반려동물 복지 향상에 기여합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션 4: 사업 영역 -->
+  <section class="about-section section-business-area">
+    <div class="about-container">
+      <span class="about-eyebrow fade-in">Business Area</span>
+      <h2 class="about-title fade-up delay-1">사업 영역</h2>
+      <p class="about-desc fade-up delay-2">
+        펫발란스는 반려동물 산업의 다양한 영역에서 활약하고 있습니다.
+      </p>
+
+      <div class="biz-area-grid">
+        <div class="biz-area-card fade-up delay-1">
+          <div class="biz-area-img">🐾</div>
+          <div class="biz-area-body">
+            <div class="biz-area-sub">PRODUCT</div>
+            <div class="biz-area-title">Pet Food & Goods</div>
+            <div class="biz-area-desc">
+              프리미엄 사료, 천연 간식, 반려동물 생활용품을
+              연구·개발하고 생산합니다.
+            </div>
+          </div>
+        </div>
+        <div class="biz-area-card fade-up delay-2">
+          <div class="biz-area-img">🛒</div>
+          <div class="biz-area-body">
+            <div class="biz-area-sub">COMMERCE</div>
+            <div class="biz-area-title">E-Commerce</div>
+            <div class="biz-area-desc">
+              네이버 스마트스토어, 쿠팡 등 주요 채널을 통한
+              온라인 유통망을 운영합니다.
+            </div>
+          </div>
+        </div>
+        <div class="biz-area-card fade-up delay-3">
+          <div class="biz-area-img">🤝</div>
+          <div class="biz-area-body">
+            <div class="biz-area-sub">PARTNERSHIP</div>
+            <div class="biz-area-title">Shelter Partnership</div>
+            <div class="biz-area-desc">
+              전국 21개 유기동물 보호소와 제휴하여
+              사회공헌 활동을 지속합니다.
+            </div>
+          </div>
+        </div>
+        <div class="biz-area-card fade-up delay-4">
+          <div class="biz-area-img">🔬</div>
+          <div class="biz-area-body">
+            <div class="biz-area-sub">R&D</div>
+            <div class="biz-area-title">Research & Development</div>
+            <div class="biz-area-desc">
+              수의영양학 전문가와 함께 반려동물의
+              건강을 위한 신제품을 연구합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션 5: 연혁 -->
+  <section class="about-section section-history">
+    <div class="about-container">
+      <span class="about-eyebrow fade-in">History</span>
+      <h2 class="about-title fade-up delay-1">함께 걸어온 길</h2>
+      <p class="about-desc fade-up delay-2" style="color: rgba(255,255,255,0.75);">
+        펫발란스가 만들어온 반려동물 산업의 발자취
+      </p>
+
+      <div class="history-grid">
+        <div class="history-item fade-up delay-1">
+          <div class="history-year">2018</div>
+          <div class="history-event">창업 준비 및 반려동물 산업 진출</div>
+        </div>
+        <div class="history-item fade-up delay-2">
+          <div class="history-year">2021</div>
+          <div class="history-event">HACCP 인증 획득<br>프리미엄 사료 개발 완료</div>
+        </div>
+        <div class="history-item fade-up delay-3">
+          <div class="history-year">2023</div>
+          <div class="history-event">MJ Holdings 주식회사 설립<br>원료 파트너십 체결</div>
+        </div>
+        <div class="history-item fade-up delay-4">
+          <div class="history-year">2024</div>
+          <div class="history-event">펫발란스 브랜드 공식 론칭<br>전국 21개 보호소 제휴</div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="history.html" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 2rem;border:1.5px solid rgba(255,255,255,0.4);border-radius:9999px;color:white;font-size:var(--size-sm);transition:var(--transition-base);">
+          전체 연혁 보기 →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 섹션 6: 인증 -->
+  <section class="about-section section-certs">
+    <div class="about-container">
+      <span class="about-eyebrow fade-in">Certifications</span>
+      <h2 class="about-title fade-up delay-1">인증과 신뢰</h2>
+      <p class="about-desc fade-up delay-2">
+        엄격한 품질 관리와 검증을 통해 신뢰를 쌓아가고 있습니다.
+      </p>
+
+      <div class="certs-grid">
+        <div class="cert-card fade-up delay-1">
+          <div class="cert-icon">🏅</div>
+          <div class="cert-name">HACCP 인증</div>
+          <div class="cert-year">2021</div>
+        </div>
+        <div class="cert-card fade-up delay-2">
+          <div class="cert-icon">🌿</div>
+          <div class="cert-name">친환경 인증</div>
+          <div class="cert-year">2022</div>
+        </div>
+        <div class="cert-card fade-up delay-3">
+          <div class="cert-icon">⭐</div>
+          <div class="cert-name">ISO 9001</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card fade-up delay-4">
+          <div class="cert-icon">🤝</div>
+          <div class="cert-name">동물복지 협약</div>
+          <div class="cert-year">2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__bottom">
