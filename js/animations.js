@@ -71,24 +71,3 @@
     });
   }
 })();
-
-// ── Brand Story Tabs ──
-(function () {
-  const tabs = document.querySelectorAll('.stats-tab');
-  const panels = document.querySelectorAll('.stats-panel');
-
-  if (tabs.length === 0) return;
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
-
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      tab.classList.add('active');
-      const targetPanel = document.querySelector(`.stats-panel[data-panel="${targetTab}"]`);
-      if (targetPanel) targetPanel.classList.add('active');
-    });
-  });
-})();
