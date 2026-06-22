@@ -183,10 +183,16 @@
   stroke-width: 1;
 }
 .hex-data {
-  fill: rgba(27, 58, 92, 0.15);
-  stroke: var(--color-primary);
+  fill: rgba(200, 32, 46, 0.25);
+  stroke: #C8202E;
   stroke-width: 2.5;
   stroke-linejoin: round;
+  filter: drop-shadow(0 4px 12px rgba(200, 32, 46, 0.2));
+}
+.hex-point {
+  fill: #C8202E;
+  stroke: white;
+  stroke-width: 2;
 }
 .hex-label {
   font-family: var(--font-ko);
