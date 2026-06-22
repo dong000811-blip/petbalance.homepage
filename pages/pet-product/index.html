@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PET PRODUCT | PETBALANCE</title>
+  <link rel="stylesheet" href="../../css/variables.css" />
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/nav.css" />
+  <link rel="stylesheet" href="../../css/sections.css" />
+  <style>
+    .page-hero {
+      height: 280px;
+      background: linear-gradient(rgba(15,26,46,0.7), rgba(15,26,46,0.7)),
+                  url('../../assets/images/product-hero.jpg') center/cover no-repeat;
+      background-color: #0F1A2E;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: var(--nav-height);
+      text-align: center;
+    }
+    .page-hero h1 { font-size: var(--size-2xl); color: white; font-weight: 700; margin-bottom: 0.5rem; }
+    .page-hero p { font-size: var(--size-sm); color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
+
+    .breadcrumb { background: #f7f8fa; border-bottom: 1px solid var(--color-border); }
+    .breadcrumb__inner {
+      max-width: var(--max-width); margin: 0 auto;
+      padding: 0.75rem 5%; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .breadcrumb a, .breadcrumb span { font-size: var(--size-xs); color: var(--color-text-sub); }
+    .breadcrumb .sep { color: var(--color-border); }
+    .breadcrumb .current { color: var(--color-primary); font-weight: 500; }
+
+    /* 필터 바 */
+    .filter-bar {
+      background: white;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 50;
+    }
+    .filter-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .filter-tabs { display: flex; gap: 0; }
+    .filter-tab {
+      padding: 1.25rem 1.5rem;
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition-base);
+      white-space: nowrap;
+    }
+    .filter-tab:hover { color: var(--color-primary); }
+    .filter-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      font-weight: 600;
+    }
+    .filter-count {
+      font-size: var(--size-xs);
+      color: var(--color-text-light);
+      font-family: var(--font-en);
+    }
+
+    /* 제품 그리드 */
+    .product-section { padding: 4rem 0 6rem; background: #fafbfc; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition-base);
+      cursor: pointer;
+      border: 1px solid #f0f0f0;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(15,26,46,0.08);
+      border-color: transparent;
+    }
+
+    .product-img {
+      aspect-ratio: 1;
+      background: #f7f8fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+    .product-img-placeholder {
+      font-size: 4rem;
+      color: var(--color-text-light);
+      opacity: 0.4;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--color-primary);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-radius: var(--radius-sm);
+      z-index: 1;
+    }
+    .product-badge.best { background: var(--color-accent); }
+    .product-badge.new { background: #2E7D4F; }
+
+    .product-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-category {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-name {
+      font-size: var(--size-md);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .product-desc {
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+      word-break: keep-all;
+    }
+
+    .product-tags {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .product-tag {
+      padding: 0.25rem 0.6rem;
+      background: #f5f5f7;
+      color: var(--color-text-sub);
+      font-size: 11px;
+      border-radius: var(--radius-sm);
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #f0f0f0;
+    }
+    .product-weight {
+      font-family: var(--font-en);
+      font-size: var(--size-sm);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .product-link {
+      font-size: var(--size-xs);
+      color: var(--color-text-sub);
+      transition: color var(--transition-base);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .product-card:hover .product-link {
+      color: var(--color-primary);
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .filter-tabs { width: 100%; overflow-x: auto; }
+      .filter-tab { padding: 1rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">
+        <img src="../../assets/images/logo.png" alt="PetBalance" style="height:44px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span style="display:none;font-family:var(--font-en);font-size:1.35rem;font-weight:700;color:var(--color-primary);">PetBalance</span>
+      </a>
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="../../pages/petbalance/" class="nav__link">PETBALANCE</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/petbalance/about.html" class="nav__dropdown-link">소개</a>
+            <a href="../../pages/petbalance/ceo.html" class="nav__dropdown-link">CEO 인사말</a>
+            <a href="../../pages/petbalance/history.html" class="nav__dropdown-link">연혁</a>
+          </div>
+        </li>
+        <li class="nav__item"><a href="../../pages/pet-product/" class="nav__link active">PET PRODUCT</a></li>
+        <li class="nav__item">
+          <a href="../../pages/pet-service/" class="nav__link">PET SERVICE</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/pet-service/" class="nav__dropdown-link">이리온몰</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/pet-advisor/" class="nav__link">PET ADVISOR</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/pet-advisor/" class="nav__dropdown-link">서비스소개</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/community/" class="nav__link">COMMUNITY</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/community/notice.html" class="nav__dropdown-link">공지사항</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/ethics/" class="nav__link">ETHICS</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/ethics/intro.html" class="nav__dropdown-link">윤리규정소개</a>
+            <a href="../../pages/ethics/report.html" class="nav__dropdown-link">윤리신고센터</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav__controls">
+        <button class="nav__lang" id="langToggle" aria-label="언어 전환">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mega Menu -->
+  <div class="nav__mega" id="megaMenu">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-col">
+        <a href="../../pages/petbalance/about.html" class="nav__mega-link">소개</a>
+        <a href="../../pages/petbalance/ceo.html" class="nav__mega-link">CEO 인사말</a>
+        <a href="../../pages/petbalance/history.html" class="nav__mega-link">연혁</a>
+        <a href="../../pages/petbalance/factory.html" class="nav__mega-link">공장소개</a>
+        <a href="../../pages/petbalance/directions.html" class="nav__mega-link">찾아오시는길</a>
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET PRODUCT 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET SERVICE 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET ADVISOR 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/community/notice.html" class="nav__mega-link">공지사항</a>
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/ethics/intro.html" class="nav__mega-link">윤리규정소개</a>
+        <a href="../../pages/ethics/report.html" class="nav__mega-link">윤리신고센터</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <h1>PET PRODUCT</h1>
+    <p>반려동물의 건강한 식탁을 위한 프리미엄 라인업</p>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="../../index.html">🏠</a>
+      <span class="sep">›</span>
+      <span class="current">PET PRODUCT</span>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">전체</button>
+        <button class="filter-tab" data-filter="chicken">닭고기</button>
+        <button class="filter-tab" data-filter="lamb">양고기</button>
+        <button class="filter-tab" data-filter="snack">간식</button>
+      </div>
+      <div class="filter-count" id="productCount">총 3개 제품</div>
+    </div>
+  </div>
+
+  <!-- Product List -->
+  <section class="product-section">
+    <div class="product-grid" id="productGrid">
+
+      <!-- 닭고기와쌀 10kg -->
+      <a href="#" class="product-card" data-cat="chicken">
+        <div class="product-img">
+          <span class="product-badge best">BEST</span>
+          <img src="../../assets/images/product-chicken-10kg.jpg" alt="닭고기와쌀 10kg"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="product-img-placeholder" style="display:none;">🐾</div>
+        </div>
+        <div class="product-body">
+          <div class="product-category">DRY FOOD · ADULT</div>
+          <div class="product-name">펫발란스 닭고기와쌀</div>
+          <div class="product-desc">
+            다견 가정을 위한 든든한 대용량 프리미엄 주식
+          </div>
+          <div class="product-tags">
+            <span class="product-tag">전연령</span>
+            <span class="product-tag">기호성</span>
+            <span class="product-tag">대용량</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-weight">10kg</span>
+            <span class="product-link">자세히 보기 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 닭고기와쌀 5kg -->
+      <a href="#" class="product-card" data-cat="chicken">
+        <div class="product-img">
+          <img src="../../assets/images/product-chicken-5kg.jpg" alt="닭고기와쌀 5kg"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="product-img-placeholder" style="display:none;">🐾</div>
+        </div>
+        <div class="product-body">
+          <div class="product-category">DRY FOOD · ADULT</div>
+          <div class="product-name">펫발란스 닭고기와쌀</div>
+          <div class="product-desc">
+            중소형견도 부담 없이, 끝까지 신선하게 급여
+          </div>
+          <div class="product-tags">
+            <span class="product-tag">중소형견</span>
+            <span class="product-tag">신선보관</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-weight">5kg</span>
+            <span class="product-link">자세히 보기 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 양고기와쌀 10kg -->
+      <a href="#" class="product-card" data-cat="lamb">
+        <div class="product-img">
+          <span class="product-badge new">NEW</span>
+          <img src="../../assets/images/product-lamb-10kg.jpg" alt="양고기와쌀 10kg"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="product-img-placeholder" style="display:none;">🐑</div>
+        </div>
+        <div class="product-body">
+          <div class="product-category">DRY FOOD · SENSITIVE</div>
+          <div class="product-name">펫발란스 양고기와쌀</div>
+          <div class="product-desc">
+            식이 알러지가 걱정될 때 선택하는 건강한 단백질
+          </div>
+          <div class="product-tags">
+            <span class="product-tag">알러지케어</span>
+            <span class="product-tag">민감견</span>
+            <span class="product-tag">대용량</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-weight">10kg</span>
+            <span class="product-link">자세히 보기 →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호 : 650-88-02820 | 대표 : 송명준</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script>
+    // 카테고리 필터
+    const tabs = document.querySelectorAll('.filter-tab');
+    const cards = document.querySelectorAll('.product-card');
+    const countEl = document.getElementById('productCount');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        let visible = 0;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.style.display = 'flex';
+            visible++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        countEl.textContent = `총 ${visible}개 제품`;
+      });
+    });
+  </script>
+</body>
+</html>
