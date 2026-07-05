@@ -181,6 +181,24 @@ button {
 .delay-4 { transition-delay: 0.4s; }
 .delay-5 { transition-delay: 0.5s; }
 
+/* 모션 최소화 선호 시 스크롤 노출/마퀴/펄스 애니메이션을 즉시 정지 */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .fade-in {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .esg-marquee__track {
+    animation: none;
+  }
+
+  .esg-hero__cta {
+    animation: none;
+  }
+}
+
 /* ---- Accessibility ---- */
 .visually-hidden {
   position: absolute;
@@ -191,7 +209,8 @@ button {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+.esg-gallery__item:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }

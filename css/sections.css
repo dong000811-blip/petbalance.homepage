@@ -300,22 +300,42 @@
   line-height: 1.25;
 }
 
+.esg-hero__accent {
+  font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  font-style: italic;
+  font-weight: 700;
+  color: #2E7D4F;
+}
+
 .esg-hero__cta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin-top: 2rem;
   padding: 0.85rem 2rem;
-  background: #2E7D4F;
+  background: linear-gradient(135deg, #E8C77E, #C8202E);
   color: white;
   border-radius: 9999px;
   font-size: var(--size-sm);
   font-weight: 600;
-  transition: var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  animation: esgCtaPulse 3s ease-in-out infinite;
 }
 .esg-hero__cta:hover {
-  background: #256B41;
   transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(200, 32, 46, 0.3);
+}
+
+@keyframes esgCtaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 32, 46, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(200, 32, 46, 0); }
+}
+
+.esg-hero__cta-note {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: var(--size-xs);
+  color: var(--color-text-sub);
 }
 
 .esg-hero__image {
@@ -431,12 +451,105 @@
   transform: scale(1.05);
 }
 
+/* 실제 로고 이미지 확보 시 이 span을 <img class="esg-partner-item__icon"> 로 교체하면
+   동일한 그레이스케일→컬러 호버가 그대로 적용됨 */
+.esg-partner-item__icon {
+  display: inline-block;
+  filter: grayscale(1);
+  transition: filter var(--transition-base);
+}
+
+.esg-partner-item:hover .esg-partner-item__icon {
+  filter: grayscale(0);
+}
+
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* ③ 임팩트 지표 */
+/* ③ 후원 활동 갤러리 (masonry via column-count, 실사진 없어 그라데이션 placeholder 사용) */
+.esg-gallery {
+  column-count: 3;
+  column-gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.esg-gallery__item {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.esg-gallery__img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.esg-gallery__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(46, 125, 79, 0.9);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.esg-gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.75) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.esg-gallery__item:hover .esg-gallery__overlay,
+.esg-gallery__item:focus-visible .esg-gallery__overlay,
+.esg-gallery__item.is-active .esg-gallery__overlay {
+  opacity: 1;
+}
+
+.esg-gallery__story {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: white;
+  transform: translateY(10px);
+  transition: transform var(--transition-base);
+}
+
+.esg-gallery__item:hover .esg-gallery__story,
+.esg-gallery__item:focus-visible .esg-gallery__story,
+.esg-gallery__item.is-active .esg-gallery__story {
+  transform: translateY(0);
+}
+
+.esg-gallery__story strong {
+  font-size: var(--size-sm);
+  font-weight: 700;
+}
+
+.esg-gallery__story span {
+  font-size: var(--size-xs);
+  color: rgba(255,255,255,0.8);
+}
+
+/* ④ 임팩트 지표 */
 .esg-impact {
   display: flex;
   align-items: center;
@@ -451,6 +564,15 @@
 .esg-impact__item {
   text-align: center;
   flex: 1;
+  border: 1px solid #E8C77E;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.esg-impact__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .esg-impact__num {
@@ -482,6 +604,13 @@
   width: 1px;
   height: 60px;
   background: var(--color-border);
+}
+
+.esg-impact__updated {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: var(--size-xs);
+  color: var(--color-text-light);
 }
 
 /* ---- 5. News & Community (좌우 6:4) ---- */
@@ -750,6 +879,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .esg-gallery {
+    column-count: 2;
+  }
+
   .news-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -927,4 +1060,5 @@
 @media (max-width: 640px) {
   .business-grid { grid-template-columns: 1fr; }
   .product-card-v2__img { padding: 1rem; }
+  .esg-gallery { column-count: 1; }
 }
