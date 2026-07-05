@@ -71,3 +71,35 @@
     });
   }
 })();
+
+// ── ESG 카운터 애니메이션 ──
+(function () {
+  const counters = document.querySelectorAll('.esg-impact__num');
+  if (counters.length === 0) return;
+
+  const animate = (el, target) => {
+    const duration = 2000;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString();
+    };
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = parseInt(entry.target.dataset.count, 10);
+        animate(entry.target, target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counters.forEach(c => observer.observe(c));
+})();
