@@ -3,40 +3,48 @@
    고정 상단바 / GNB / 메가메뉴 / 사이드 도트네비
    ============================================ */
 
-/* ---- Top Bar ---- */
+/* ── Top Nav Bar ── */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: var(--nav-height);
+  right: 0;
   z-index: var(--z-nav);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
   border-bottom: 1px solid transparent;
-  transition: var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
-.nav.scrolled {
-  border-bottom-color: var(--color-border);
+.nav.scrolled,
+.nav.menu-open {
+  border-color: var(--color-border);
   box-shadow: var(--shadow-nav);
+}
+
+.nav.nav--transparent {
+  background: transparent;
 }
 
 .nav__inner {
   max-width: var(--max-width);
-  height: 100%;
+  width: 100%;
   margin: 0 auto;
-  padding: var(--section-padding);
-  display: flex;
+  padding: 0 3%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
+  gap: 2rem;
 }
 
-/* ---- Logo ---- */
+/* ── Logo ── */
 .nav__logo {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
+  flex-shrink: 0;
 }
 
 .nav__logo-en {
@@ -57,52 +65,51 @@
   letter-spacing: 0.05em;
 }
 
-/* ---- GNB ---- */
+/* ── GNB Menu (중앙 정렬, 균등 간격) ── */
 .nav__menu {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  height: 100%;
-  margin-left: 80px;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .nav__item {
   position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 .nav__link {
-  position: relative;
   font-family: var(--font-en);
   font-size: var(--size-sm);
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   color: var(--color-text);
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
+  transition: color var(--transition-base);
+  white-space: nowrap;
 }
 
 .nav__link::after {
   content: '';
   position: absolute;
+  bottom: -2px;
   left: 0;
-  bottom: 0;
   width: 0;
   height: 2px;
   background: var(--color-primary);
-  transition: var(--transition-base);
+  transition: width var(--transition-base);
 }
 
-.nav__item:hover .nav__link {
+.nav__link:hover,
+.nav__link.active {
   color: var(--color-primary);
 }
 
-.nav__item:hover .nav__link::after {
+.nav__link:hover::after,
+.nav__link.active::after {
   width: 100%;
 }
 
-/* GNB 개별 드롭다운 (필요 시 HTML 주석 해제) */
+/* ── Dropdown ── */
 .nav__dropdown {
   position: absolute;
   top: 100%;
@@ -143,61 +150,72 @@
   background: var(--color-bg-section);
 }
 
-/* ---- Right Controls ---- */
+/* ── Right Controls (언어 + 햄버거, 메뉴와 거리 두기) ── */
 .nav__controls {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: 0.75rem;
+  padding-left: 2rem;
+  border-left: 1px solid var(--color-border);
+  margin-left: 1rem;
 }
 
 .nav__lang {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-en);
   font-size: var(--size-xs);
   font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--color-text);
+  letter-spacing: 0.08em;
+  color: var(--color-text-sub);
+  cursor: pointer;
+  transition: var(--transition-base);
+  background: transparent;
+}
+
+.nav__lang:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .nav__lang svg {
   flex-shrink: 0;
 }
 
-/* ---- Hamburger ---- */
+/* ── Hamburger ── */
 .nav__hamburger {
-  position: relative;
-  width: 26px;
-  height: 18px;
-  z-index: var(--z-hamburger);
+  width: 24px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .nav__hamburger span {
-  position: absolute;
-  left: 0;
-  width: 100%;
+  display: block;
   height: 2px;
-  border-radius: 2px;
   background: var(--color-text);
+  border-radius: 2px;
   transition: var(--transition-base);
+  transform-origin: center;
 }
-
-.nav__hamburger span:nth-child(1) { top: 0; }
-.nav__hamburger span:nth-child(2) { top: 8px; }
-.nav__hamburger span:nth-child(3) { top: 16px; }
 
 .nav__hamburger.active span:nth-child(1) {
-  top: 8px;
-  transform: rotate(45deg);
+  transform: translateY(9px) rotate(45deg);
 }
-
 .nav__hamburger.active span:nth-child(2) {
   opacity: 0;
 }
-
 .nav__hamburger.active span:nth-child(3) {
-  top: 8px;
-  transform: rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 /* ---- Mega Menu (wooriwa 스타일 — 햄버거 클릭 시 상단 전체폭 드롭) ---- */
@@ -308,11 +326,22 @@
 
 /* ============================================
    Responsive
-   1024px: 사이드 도트네비 숨김, GNB → 햄버거 전용
+   1024px: GNB → 햄버거 전용, 사이드 도트네비 숨김
    ============================================ */
 @media (max-width: 1024px) {
+  .nav__inner {
+    grid-template-columns: auto 1fr;
+  }
+
   .nav__menu {
     display: none;
+  }
+
+  .nav__controls {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    justify-self: end;
   }
 
   .side-nav {
