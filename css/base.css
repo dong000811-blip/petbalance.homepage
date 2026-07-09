@@ -197,6 +197,14 @@ button {
   .esg-hero__cta {
     animation: none;
   }
+
+  .esg-hero__image img {
+    animation: none;
+  }
+
+  .scroll-down {
+    animation: none;
+  }
 }
 
 /* ---- Accessibility ---- */
@@ -209,8 +217,7 @@ button {
 }
 
 a:focus-visible,
-button:focus-visible,
-.esg-gallery__item:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }

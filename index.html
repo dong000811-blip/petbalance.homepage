@@ -156,31 +156,32 @@
     <video class="hero__video" autoplay muted loop playsinline preload="auto">
       <source src="assets/video/hero-bg.mp4" type="video/mp4">
     </video>
+    <div class="hero__overlay"></div>
 
     <div class="hero__container">
       <div class="hero__content">
-        <div class="hero__divider"></div>
-        <span class="hero__eyebrow">Since 2013 · Premium Pet Food</span>
+        <span class="hero__eyebrow">PREMIUM PET FOOD</span>
         <h1 class="hero__title">
-          반려동물의 건강한<br>
-          내일을 <span class="hero__accent">만듭니다</span>
+          반려동물과 사람의<br>
+          <strong class="hero__title-strong">건강한 균형</strong>을 만들어가는 펫발란스
         </h1>
-        <p class="hero__sub">
-          수의영양학에 기반한 레시피로, 반려동물의 건강과 행복을 위한<br>
-          프리미엄 솔루션을 제안합니다.
-        </p>
         <div class="hero__cta">
-          <a href="pages/pet-product/" class="hero-btn hero-btn--primary">
-            제품 보러가기 <span>→</span>
-          </a>
-          <a href="pages/petbalance/about.html" class="hero-btn hero-btn--ghost">
-            브랜드 스토리
+          <a href="pages/petbalance/about.html" class="hero-btn--ghost">
+            <svg class="hero-btn__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M4 2.5v11l10-5.5-10-5.5z" fill="currentColor" />
+            </svg>
+            브랜드 스토리 보기
           </a>
         </div>
       </div>
     </div>
 
-    <div class="scroll-down">SCROLL DOWN</div>
+    <div class="scroll-down">
+      SCROLL DOWN
+      <svg class="scroll-down__icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
   </section>
 
   <!-- ========================================================
@@ -305,7 +306,7 @@
        SECTION 4: ESG & NGO (좌우 2단 + 슬라이드)
        ======================================================== -->
   <section class="section section-esg" id="esg">
-    <div class="container">
+    <div class="container esg-container">
 
       <!-- ① 상단 임팩트 스토리 -->
       <div class="esg-hero">
@@ -319,21 +320,16 @@
             펫발란스는 전국 유기동물 보호소 및 협회와 함께,<br>
             더 나은 반려동물 문화를 만들어가고 있습니다.
           </p>
-          <a href="https://mkt.shopping.naver.com/link/69af69d22fb5a54c0723daef"
-            class="esg-hero__cta fade-up delay-3" target="_blank" rel="noopener">
-            1+1 캠페인 참여하기 →
+          <!-- TODO: 후원 활동 상세 페이지/섹션 URL 확정 필요 -->
+          <a href="#" class="esg-hero__cta fade-up delay-3">
+            후원 활동 보러가기 →
           </a>
           <span class="esg-hero__cta-note fade-up delay-3">지금 참여하면 보호소에 사료가 두 배로 전달됩니다</span>
         </div>
         <!-- 실제 후원 현장 사진 확보 시 아래 img src만 교체하면 적용됨 -->
         <div class="esg-hero__image fade-in delay-2">
-          <img src="assets/images/esg-hero.jpg" alt="유기동물 보호소 후원" onerror="this.style.display='none'">
-          <div class="esg-hero__placeholder">🐾</div>
-          <div class="esg-hero__overlay">
-            <div class="esg-hero__quote">
-              "매일 한 그릇의 사료가<br>수많은 아이들의 하루를 바꿉니다."
-            </div>
-          </div>
+          <img src="assets/images/esg-hero.jpg" alt="펫발란스 보호소 후원 현장" loading="lazy" onerror="this.style.display='none'">
+          <div class="esg-hero__placeholder" aria-hidden="true">📷</div>
         </div>
       </div>
 
@@ -349,85 +345,17 @@
         </div>
       </div>
 
-      <!-- ③ 후원 활동 갤러리 (실제 사진 확보 전까지 그라데이션 placeholder 사용, .esg-gallery__img 안 img 자리에 교체) -->
-      <div class="esg-gallery">
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="행복한발바닥 보호소 후원 활동, 2025년 12월">
-          <div class="esg-gallery__img" style="aspect-ratio: 3/4; background: linear-gradient(135deg, #2E7D4F, #1B3A5C);">🐾</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>행복한발바닥 보호소</strong>
-              <span>사료 200kg 후원</span>
-              <span>2025.12</span>
-            </div>
-          </div>
+      <!-- ③ 임팩트 지표 (숫자/단위/라벨은 js/animations.js의 ESG_STATS_CONFIG가 렌더링) -->
+      <div class="esg-stats">
+        <div class="esg-impact">
+          <div class="esg-impact__item fade-up delay-1" data-stat="feed"></div>
+          <div class="esg-impact__divider"></div>
+          <div class="esg-impact__item fade-up delay-2" data-stat="shelter"></div>
+          <div class="esg-impact__divider"></div>
+          <div class="esg-impact__item fade-up delay-3" data-stat="people"></div>
         </div>
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="서울유기동물센터 후원 활동, 2025년 11월">
-          <div class="esg-gallery__img" style="aspect-ratio: 1/1; background: linear-gradient(135deg, #C8202E, #1B3A5C);">🐕</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>서울유기동물센터</strong>
-              <span>중성화 지원 캠페인</span>
-              <span>2025.11</span>
-            </div>
-          </div>
-        </div>
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="부산동물사랑 후원 활동, 2025년 10월">
-          <div class="esg-gallery__img" style="aspect-ratio: 4/3; background: linear-gradient(135deg, #E8C77E, #2E7D4F);">🐾</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>부산동물사랑</strong>
-              <span>사료 150kg 후원</span>
-              <span>2025.10</span>
-            </div>
-          </div>
-        </div>
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="경기도유기동물협회 후원 활동, 2025년 9월">
-          <div class="esg-gallery__img" style="aspect-ratio: 1/1; background: linear-gradient(135deg, #1B3A5C, #2E7D4F);">🌿</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>경기도유기동물협회</strong>
-              <span>입양 홍보 부스 운영</span>
-              <span>2025.09</span>
-            </div>
-          </div>
-        </div>
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="인천보호소연합 후원 활동, 2025년 8월">
-          <div class="esg-gallery__img" style="aspect-ratio: 3/4; background: linear-gradient(135deg, #2E7D4F, #C8202E);">💚</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>인천보호소연합</strong>
-              <span>사료 300kg 후원</span>
-              <span>2025.08</span>
-            </div>
-          </div>
-        </div>
-        <div class="esg-gallery__item" tabindex="0" role="group" aria-label="대전펫케어 후원 활동, 2025년 7월">
-          <div class="esg-gallery__img" style="aspect-ratio: 4/3; background: linear-gradient(135deg, #C8202E, #E8C77E);">🏥</div>
-          <span class="esg-gallery__badge">✓ 인증 보호소</span>
-          <div class="esg-gallery__overlay">
-            <div class="esg-gallery__story">
-              <strong>대전펫케어</strong>
-              <span>진료비 지원</span>
-              <span>2025.07</span>
-            </div>
-          </div>
-        </div>
+        <p class="esg-impact__updated">마지막 업데이트: 2026.07</p>
       </div>
-
-      <!-- ④ 임팩트 지표 (숫자/단위/라벨은 js/animations.js의 ESG_STATS_CONFIG가 렌더링) -->
-      <div class="esg-impact">
-        <div class="esg-impact__item fade-up delay-1" data-stat="feed"></div>
-        <div class="esg-impact__divider"></div>
-        <div class="esg-impact__item fade-up delay-2" data-stat="shelter"></div>
-        <div class="esg-impact__divider"></div>
-        <div class="esg-impact__item fade-up delay-3" data-stat="people"></div>
-      </div>
-      <p class="esg-impact__updated">마지막 업데이트: 2026.07</p>
 
     </div>
   </section>

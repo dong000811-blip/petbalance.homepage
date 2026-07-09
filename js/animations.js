@@ -176,24 +176,3 @@
 
   counters.forEach((c) => observer.observe(c.el));
 })();
-
-// ── ESG: 갤러리 오버레이 탭 토글 (모바일 — 호버 대신 탭으로 노출) ──
-(function () {
-  const items = document.querySelectorAll('.esg-gallery__item');
-  if (items.length === 0) return;
-
-  items.forEach((item) => {
-    item.addEventListener('click', () => {
-      const wasActive = item.classList.contains('is-active');
-      items.forEach((i) => i.classList.remove('is-active'));
-      if (!wasActive) item.classList.add('is-active');
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    const isInsideGallery = Array.from(items).some((item) => item.contains(event.target));
-    if (!isInsideGallery) {
-      items.forEach((i) => i.classList.remove('is-active'));
-    }
-  });
-})();
