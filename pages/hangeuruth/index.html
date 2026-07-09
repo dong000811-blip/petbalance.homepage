@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="펫발란스 - 한그릇 NGO 활동 소개" />
+  <title>한그릇 | PETBALANCE</title>
+  <link rel="stylesheet" href="../../css/variables.css" />
+  <link rel="stylesheet" href="../../css/base.css" />
+  <link rel="stylesheet" href="../../css/nav.css" />
+  <link rel="stylesheet" href="../../css/sections.css" />
+  <style>
+    /* 한그릇 페이지 전용 스타일 (about.html 풀스크롤 섹션 패턴 재사용) */
+    .hg-section {
+      padding: calc(var(--nav-height) + 4rem) 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hg-container {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    .hg-eyebrow {
+      font-family: var(--font-en);
+      font-size: var(--size-sm);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .hg-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      word-break: keep-all;
+    }
+    .hg-desc {
+      font-size: var(--size-md);
+      line-height: 1.9;
+      color: var(--color-text-sub);
+      max-width: 700px;
+      word-break: keep-all;
+    }
+
+    /* ① Hero */
+    .hg-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #0F2340 0%, #1B3A5C 60%, #2A5280 100%);
+      color: white;
+      text-align: center;
+    }
+    .hg-hero .hg-container { position: relative; z-index: 1; }
+    .hg-hero .hg-eyebrow { color: var(--cream); opacity: 0.85; }
+    .hg-hero .hg-title { color: white; }
+    .hg-hero .hg-desc { color: rgba(255,255,255,0.8); margin: 0 auto; }
+
+    /* ② 소개 */
+    .hg-intro { background: var(--color-warm, #F5F0E8); }
+    .hg-intro p + p { margin-top: 1.25rem; }
+
+    /* ③ 활동 현황 카드 그리드 */
+    .hg-activities { background: white; }
+    .hg-activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .hg-activity-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition-base);
+      background: white;
+    }
+    .hg-activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .hg-activity-img {
+      aspect-ratio: 4/3;
+      background: #E9ECEF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #ADB5BD;
+    }
+    .hg-activity-body { padding: 1.5rem; }
+    .hg-activity-title {
+      font-size: var(--size-md);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .hg-activity-desc {
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+      line-height: 1.7;
+    }
+
+    /* ④ 임팩트 숫자 */
+    .hg-impact { background: #F7F8FA; }
+    .hg-impact-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding: 2.5rem 2rem;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+    }
+    .hg-impact-item { flex: 1; text-align: center; }
+    .hg-impact-num {
+      font-family: var(--font-en);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: var(--color-green);
+      line-height: 1;
+    }
+    .hg-impact-unit {
+      font-family: var(--font-en);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-green);
+      margin-left: 0.15rem;
+    }
+    .hg-impact-label {
+      margin-top: 0.6rem;
+      font-size: var(--size-sm);
+      color: var(--color-text-sub);
+    }
+    .hg-impact-divider {
+      width: 1px;
+      height: 56px;
+      background: var(--color-border);
+    }
+
+    /* ⑤ CTA */
+    .hg-cta {
+      background: linear-gradient(135deg, #1B3A5C, #0F2340);
+      color: white;
+      text-align: center;
+      min-height: 40vh;
+      display: flex;
+      align-items: center;
+    }
+    .hg-cta .hg-title { color: white; }
+    .hg-cta .hg-desc { color: rgba(255,255,255,0.75); margin: 0 auto 2rem; }
+    .hg-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2.5rem;
+      background: linear-gradient(135deg, #E8C77E, #C8202E);
+      color: white;
+      border-radius: 9999px;
+      font-size: var(--size-sm);
+      font-weight: 600;
+      transition: var(--transition-base);
+    }
+    .hg-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(200, 32, 46, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .hg-activity-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hg-activity-grid { grid-template-columns: 1fr; }
+      .hg-impact-grid { flex-direction: column; gap: 1.75rem; padding: 2rem 1.5rem; }
+      .hg-impact-divider { width: 40px; height: 1px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- TODO: 한그릇 실제 콘텐츠로 교체 예정 (문구/이미지/데이터 전부 placeholder) -->
+
+  <!-- Nav (다른 서브페이지와 동일 구조, ../../ 기준 경로) -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">
+        <img src="../../assets/images/logo.png" alt="PetBalance" style="height:44px;width:auto;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span style="display:none;font-family:var(--font-en);font-size:1.35rem;font-weight:700;color:var(--color-primary);">PetBalance</span>
+      </a>
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="../../pages/petbalance/" class="nav__link">PETBALANCE</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/petbalance/about.html" class="nav__dropdown-link">소개</a>
+            <a href="../../pages/petbalance/ceo.html" class="nav__dropdown-link">CEO 인사말</a>
+            <a href="../../pages/petbalance/history.html" class="nav__dropdown-link">연혁</a>
+          </div>
+        </li>
+        <li class="nav__item"><a href="../../pages/pet-product/" class="nav__link">PRODUCT</a></li>
+        <li class="nav__item">
+          <a href="../../pages/pet-service/" class="nav__link active">SERVICE</a>
+          <div class="nav__dropdown">
+            <a href="https://smartstore.naver.com/pet_balance" class="nav__dropdown-link" target="_blank" rel="noopener">공식몰</a>
+            <a href="../../pages/hangeuruth/" class="nav__dropdown-link">한그릇</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/pet-advisor/" class="nav__link">ADVISOR</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/pet-advisor/" class="nav__dropdown-link">서비스소개</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/community/" class="nav__link">COMMUNITY</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/community/notice.html" class="nav__dropdown-link">공지사항</a>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a href="../../pages/ethics/" class="nav__link">ETHICS</a>
+          <div class="nav__dropdown">
+            <a href="../../pages/ethics/intro.html" class="nav__dropdown-link">윤리규정소개</a>
+            <a href="../../pages/ethics/report.html" class="nav__dropdown-link">윤리신고센터</a>
+          </div>
+        </li>
+      </ul>
+      <div class="nav__controls">
+        <button class="nav__lang" id="langToggle" aria-label="언어 전환">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          KOR
+        </button>
+        <button class="nav__hamburger" id="hamburger" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mega Menu -->
+  <div class="nav__mega" id="megaMenu">
+    <div class="nav__mega-inner">
+      <div class="nav__mega-col">
+        <a href="../../pages/petbalance/about.html" class="nav__mega-link">소개</a>
+        <a href="../../pages/petbalance/ceo.html" class="nav__mega-link">CEO 인사말</a>
+        <a href="../../pages/petbalance/history.html" class="nav__mega-link">연혁</a>
+        <a href="../../pages/petbalance/factory.html" class="nav__mega-link">공장소개</a>
+        <a href="../../pages/petbalance/directions.html" class="nav__mega-link">찾아오시는길</a>
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET PRODUCT 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET SERVICE 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <!-- PET ADVISOR 서브메뉴 -->
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/community/notice.html" class="nav__mega-link">공지사항</a>
+      </div>
+      <div class="nav__mega-col">
+        <a href="../../pages/ethics/intro.html" class="nav__mega-link">윤리규정소개</a>
+        <a href="../../pages/ethics/report.html" class="nav__mega-link">윤리신고센터</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ① Hero -->
+  <section class="hg-section hg-hero">
+    <div class="hg-container">
+      <span class="hg-eyebrow fade-in">한그릇 · NGO ACTIVITY</span>
+      <h1 class="hg-title fade-up delay-1">한그릇</h1>
+      <!-- TODO: 한그릇 실제 소개 문구로 교체 -->
+      <p class="hg-desc fade-up delay-2">[여기에 한그릇 소개 문구가 들어갑니다]</p>
+    </div>
+  </section>
+
+  <!-- ② 소개 -->
+  <section class="hg-section hg-intro">
+    <div class="hg-container">
+      <span class="hg-eyebrow fade-in">About 한그릇</span>
+      <h2 class="hg-title fade-up delay-1">한 그릇의 나눔이 만드는 변화</h2>
+      <!-- TODO: 한그릇 활동 취지/배경 실제 문구로 교체 -->
+      <p class="hg-desc fade-up delay-2">
+        [여기에 한그릇 활동의 취지와 배경을 설명하는 문단이 들어갑니다. 실제 콘텐츠 확정 전까지 노출되는 임시 텍스트입니다.]
+      </p>
+      <p class="hg-desc fade-up delay-3">
+        [여기에 한그릇이 추구하는 가치와 운영 방식에 대한 설명이 들어갑니다.]
+      </p>
+      <p class="hg-desc fade-up delay-4">
+        [여기에 향후 계획이나 파트너십에 대한 소개 문단이 들어갑니다.]
+      </p>
+    </div>
+  </section>
+
+  <!-- ③ 활동 현황 카드형 그리드 -->
+  <section class="hg-section hg-activities">
+    <div class="hg-container">
+      <span class="hg-eyebrow fade-in">Our Activities</span>
+      <h2 class="hg-title fade-up delay-1">활동 현황</h2>
+      <!-- TODO: 실제 활동 사진/제목/설명으로 교체 -->
+      <div class="hg-activity-grid">
+        <div class="hg-activity-card fade-up delay-1">
+          <div class="hg-activity-img" aria-hidden="true">🐾</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 01</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+        <div class="hg-activity-card fade-up delay-2">
+          <div class="hg-activity-img" aria-hidden="true">🍚</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 02</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+        <div class="hg-activity-card fade-up delay-3">
+          <div class="hg-activity-img" aria-hidden="true">🏠</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 03</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+        <div class="hg-activity-card fade-up delay-4">
+          <div class="hg-activity-img" aria-hidden="true">🩺</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 04</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+        <div class="hg-activity-card fade-up delay-1">
+          <div class="hg-activity-img" aria-hidden="true">🤝</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 05</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+        <div class="hg-activity-card fade-up delay-2">
+          <div class="hg-activity-img" aria-hidden="true">🎗️</div>
+          <div class="hg-activity-body">
+            <div class="hg-activity-title">활동 제목 06</div>
+            <div class="hg-activity-desc">[활동 설명이 들어갈 placeholder 텍스트입니다.]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 임팩트 숫자 -->
+  <section class="hg-section hg-impact">
+    <div class="hg-container">
+      <span class="hg-eyebrow fade-in">Our Impact</span>
+      <h2 class="hg-title fade-up delay-1">한그릇이 만든 변화</h2>
+      <!-- TODO: 실제 집계 데이터로 교체 -->
+      <div class="hg-impact-grid">
+        <div class="hg-impact-item fade-up delay-1">
+          <span class="hg-impact-num">1,000</span><span class="hg-impact-unit">그릇+</span>
+          <div class="hg-impact-label">누적 전달 그릇 수</div>
+        </div>
+        <div class="hg-impact-divider"></div>
+        <div class="hg-impact-item fade-up delay-2">
+          <span class="hg-impact-num">12</span><span class="hg-impact-unit">개소</span>
+          <div class="hg-impact-label">협력 기관</div>
+        </div>
+        <div class="hg-impact-divider"></div>
+        <div class="hg-impact-item fade-up delay-3">
+          <span class="hg-impact-num">3,500</span><span class="hg-impact-unit">명+</span>
+          <div class="hg-impact-label">함께한 후원자</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ CTA -->
+  <section class="hg-section hg-cta">
+    <div class="hg-container">
+      <h2 class="hg-title fade-up delay-1">한그릇과 함께해주세요</h2>
+      <p class="hg-desc fade-up delay-2">작은 나눔이 모여 더 큰 변화를 만듭니다.</p>
+      <!-- TODO: 후원 문의 링크/폼 URL 확정 필요 -->
+      <a href="#" class="hg-cta-btn fade-up delay-3">함께하기 →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__bottom">
+        <span>© 2025 MJ Holdings. All rights reserved.</span>
+        <span>사업자등록번호 : 650-88-02820 | 대표 : 송명준</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script src="../../js/animations.js"></script>
+</body>
+</html>
