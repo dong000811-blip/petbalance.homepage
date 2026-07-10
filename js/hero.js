@@ -1,6 +1,6 @@
 /* ============================================
    PETBALANCE — Hero Scroll Scrub Animation
-   GSAP ScrollTrigger: 스크롤 진행률에 연동해 영상 확대 + 텍스트 페이드아웃
+   GSAP ScrollTrigger: 스크롤 진행률에 연동해 영상 확대 + 오버레이 진해짐 (타이틀 텍스트는 고정)
    ============================================ */
 (function () {
   function initHeroScroll() {
@@ -13,7 +13,7 @@
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (isMobile) {
-      /* 모바일: pin 없이 가벼운 scrub으로 카피만 페이드아웃 (터치 스크롤 버벅임 방지) */
+      /* 모바일: pin 없이 가벼운 scrub으로 오버레이만 진하게 (터치 스크롤 버벅임 방지) */
       gsap.timeline({
         scrollTrigger: {
           trigger: '#hero',
@@ -22,7 +22,6 @@
           scrub: 0.5,
         },
       })
-        .to('.hero__copy', { opacity: 0, y: -30, ease: 'none' }, 0)
         .to('.hero__overlay', { opacity: 0.85, ease: 'none' }, 0);
       return;
     }
@@ -38,7 +37,6 @@
       },
     })
       .to('.hero__video, .hero__bg', { scale: 1.15, ease: 'none' }, 0)
-      .to('.hero__copy', { opacity: 0, y: -60, ease: 'none' }, 0.1)
       .to('.hero__overlay', { opacity: 0.85, ease: 'none' }, 0);
   }
 

@@ -46,6 +46,13 @@
   text-align: center;
 }
 
+/* 스크롤 스크러빙 애니메이션과 무관하게 타이틀/CTA는 항상 선명하게 고정 */
+.hero__copy,
+.hero__eyebrow,
+.hero__cta {
+  opacity: 1 !important;
+}
+
 .hero__eyebrow {
   display: block;
   font-family: var(--font-en);
