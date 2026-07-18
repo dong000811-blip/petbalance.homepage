@@ -176,3 +176,36 @@
 
   counters.forEach((c) => observer.observe(c.el));
 })();
+
+// ── ESG: 후원 현장 사진 슬라이드쇼 (크로스페이드, 4.5초 간격) ──
+(function () {
+  const container = document.querySelector('.esg-hero__slideshow');
+  const slides = document.querySelectorAll('.esg-slide');
+  if (!container || slides.length <= 1) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return; // 첫 이미지만 고정 표시
+
+  const INTERVAL = 4500;
+  let current = 0;
+  let timer = null;
+
+  const nextSlide = () => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  };
+
+  const start = () => {
+    if (timer) return;
+    timer = setInterval(nextSlide, INTERVAL);
+  };
+  const stop = () => {
+    clearInterval(timer);
+    timer = null;
+  };
+
+  start();
+  container.addEventListener('mouseenter', stop);
+  container.addEventListener('mouseleave', start);
+})();

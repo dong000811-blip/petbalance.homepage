@@ -486,12 +486,19 @@ a.brand-principle-card:focus-visible {
   box-shadow: 0 20px 60px rgba(46, 125, 79, 0.15);
 }
 
-.esg-hero__image img {
+.esg-slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: relative;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.esg-slide.active {
+  opacity: 1;
   animation: esgKenBurns 20s linear infinite alternate;
 }
 
@@ -509,6 +516,13 @@ a.brand-principle-card:focus-visible {
 @keyframes esgKenBurns {
   from { transform: scale(1); }
   to { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .esg-slide {
+    transition: none;
+    animation: none !important;
+  }
 }
 
 /* ② 파트너 무한 스크롤 */
