@@ -427,6 +427,7 @@ a.brand-principle-card:focus-visible {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1.1fr;
+  grid-template-rows: 100%;
   gap: 2.5rem;
   align-items: center;
   overflow: hidden;
@@ -528,7 +529,8 @@ a.brand-principle-card:focus-visible {
 /* ② 파트너 무한 스크롤 */
 .esg-partners {
   flex: 0 0 15%;
-  min-height: 0;
+  min-height: 92px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -561,6 +563,8 @@ a.brand-principle-card:focus-visible {
 }
 
 .esg-marquee {
+  flex-shrink: 0;
+  min-height: 34px;
   overflow: hidden;
   position: relative;
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
@@ -580,7 +584,7 @@ a.brand-principle-card:focus-visible {
 
 .esg-partner-item {
   flex-shrink: 0;
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.85rem;
   background: #F5F0E8;
   border-radius: 9999px;
   font-size: 11px;
@@ -675,6 +679,36 @@ a.brand-principle-card:focus-visible {
   margin-top: 0.6rem;
   font-size: var(--size-xs);
   color: var(--color-text-light);
+}
+
+/* 뷰포트 높이가 낮은 노트북(≤760px)에서는 100vh 고정을 풀어
+   Hero/파트너 마퀴/스탯이 서로 밀려 잘리는 대신 자연스러운 세로 흐름으로 전환 */
+@media (max-height: 760px) {
+  .section-esg {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    padding-bottom: 2rem;
+  }
+
+  .esg-container {
+    height: auto;
+  }
+
+  .esg-hero,
+  .esg-partners,
+  .esg-stats {
+    flex: none;
+  }
+
+  .esg-hero {
+    overflow: visible;
+  }
+
+  .esg-hero__image {
+    height: 320px;
+    max-height: 320px;
+  }
 }
 
 /* ---- 5. News & Community (좌우 6:4) ---- */
@@ -969,6 +1003,7 @@ a.brand-principle-card:focus-visible {
   .esg-hero {
     flex: none;
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     gap: 2rem;
     overflow: visible;
   }
