@@ -172,7 +172,7 @@
   width: 100%;
   height: 100%;
   min-height: 0;
-  padding: 2rem 0;
+  padding: 2rem 48px;
   gap: 1.5rem;
 }
 
@@ -224,7 +224,7 @@
   min-height: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .brand-principle-card {
@@ -233,7 +233,7 @@
   justify-content: center;
   background: rgba(245, 240, 232, 0.06);
   border-radius: 10px;
-  padding: 14px;
+  padding: 18px 20px;
   color: var(--cream);
   transition: var(--transition-base);
 }
@@ -252,7 +252,7 @@ a.brand-principle-card:focus-visible {
 .brand-principle-title {
   font-size: var(--size-sm);
   font-weight: 700;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .brand-principle-desc {
@@ -949,8 +949,9 @@ a.brand-principle-card:focus-visible {
     gap: 1.25rem;
   }
 
-  .brand-principle-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .brand-container {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
   .section-esg {
@@ -1017,6 +1018,8 @@ a.brand-principle-card:focus-visible {
   .brand-container {
     height: auto;
     gap: 2rem;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .brand-headline,
@@ -1024,6 +1027,11 @@ a.brand-principle-card:focus-visible {
   .stats-grid,
   .brand-cta {
     flex: none;
+  }
+
+  .brand-principle-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .brand-title {
