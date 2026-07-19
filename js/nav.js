@@ -39,7 +39,10 @@
   hamburger.addEventListener('click', toggleMega);
 
   megaMenu.addEventListener('click', (event) => {
-    if (event.target.classList.contains('nav__mega-link')) {
+    if (
+      event.target.classList.contains('nav__mega-link') ||
+      event.target.classList.contains('nav__mega-title')
+    ) {
       closeMega();
     }
   });
